@@ -44,7 +44,7 @@ class Dashboard extends StatelessWidget{
   void _showProprietarioList(context){
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ProprietarioList(),
+        builder: (context) => PessoaFisicaList(),
       )
     );
   }

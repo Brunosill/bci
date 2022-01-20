@@ -1,7 +1,10 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class PessoaFisicaForm extends StatefulWidget {
   const PessoaFisicaForm({Key? key}) : super(key: key);
@@ -11,9 +14,12 @@ class PessoaFisicaForm extends StatefulWidget {
 }
 
 class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
+  int _index = 0;
 
+  final _formDados = GlobalKey<FormState>();
   final TextEditingController _nomeProprietarioController = TextEditingController();
-  final TextEditingController _cpfCnpjController = TextEditingController();
+  final TextEditingController _cpfController = TextEditingController();
+
   final TextEditingController _codLogradController = TextEditingController();
   final TextEditingController _logradController = TextEditingController();
   final TextEditingController _numeroController = TextEditingController();
@@ -31,6 +37,261 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
         appBar: AppBar(title: const Text('Cadastro de Proprietario'),
         ),
         body: SingleChildScrollView(
+          child: Center(
+            child: Stepper(
+              currentStep: _index,
+              steps: <Step>[
+                Step(
+                    title: const Text('Dados do Pessoais'),
+                    content: Form(
+                      key: _formDados,
+                      child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Nome Completo',
+                                ),
+                                style: const TextStyle(
+                                    fontSize: 24.0
+                                ),
+                                controller: _nomeProprietarioController,
+                                textCapitalization: TextCapitalization.words,
+                                keyboardType: TextInputType.text,
+                                validator: (value){
+                                  if(value!.length < 3){
+                                    return "Informe Nome Completo";
+                                  }
+                                  if(!value.contains(' ')){
+                                    return "Imforme Nome Completo";
+                                  }
+                                  return null;
+                                }
+                            ), //Nome Completo
+                            TextFormField(
+                                controller: _cpfController,
+                                decoration: const InputDecoration(
+                                    labelText: "CPF"
+                                ),
+                                style: TextStyle(
+                                    fontSize: 24.0
+                                ),
+                                maxLength: 18,
+                                keyboardType: TextInputType.number,
+                                inputFormatters:[
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  CpfOuCnpjFormatter(),
+                                ],
+                                validator: (value){
+                                  if(!CPFValidator.isValid(value)){
+                                    return 'Digite Cpf valido';
+                                  }
+                                  return null;
+                                }
+                            )
+                          ]
+                      ),
+                    )
+                ),
+                Step(
+                    title: const Text('Endereço'),
+                    content: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                controller: _logradController,
+                                decoration: const InputDecoration(
+                                  labelText: "Logradouro",
+                                ),
+                                keyboardType: TextInputType.text,
+
+                              ),
+
+                              Row(
+                                children: [
+                                  Flexible(
+                                      flex: 2,
+                                      child: TextFormField(
+                                          controller: _codLogradController,
+                                          decoration: const InputDecoration(
+                                              labelText: 'Cód. Lograd.'
+                                          ),
+                                          style: TextStyle(
+                                              fontSize: 18
+                                          ),
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.digitsOnly,
+                                          ]
+                                      )
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                      flex: 3,
+                                      child: TextFormField(
+                                          controller: _numeroController,
+                                          decoration: InputDecoration(
+                                            labelText: "Número",
+                                          ),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                          )
+                                      )
+                                  )
+                                ],
+                              ),
+
+                              Row(
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      child: TextFormField(
+                                        controller:_aptoScvController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Apto. S.CV',
+                                        ),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                        flex: 2,
+                                        child: TextFormField(
+                                          controller: _bairroController,
+                                          decoration: const InputDecoration(
+                                              labelText: "Bairro"
+                                          ),
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                        )
+                                    ),
+                                  ]
+                              ),
+
+                              TextFormField(
+                                  controller: _cidadeController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Cidade',
+                                  ),
+                                  style: const TextStyle(
+                                      fontSize: 20
+                                  )
+                              ),
+
+                              Row(
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      child: TextFormField(
+                                        controller:_ufController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'UF',
+                                        ),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                        flex: 2,
+                                        child: TextFormField(
+                                          controller: _cepController,
+                                          decoration: const InputDecoration(
+                                              labelText: "CEP"
+                                          ),
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.digitsOnly,
+                                          ],
+                                        )
+                                    ),
+                                  ]
+                              ),
+                            ]
+                        )
+                    )
+                ),
+              ],
+
+              onStepCancel: (){
+                if (_index > 0){
+                  setState((){
+                    _index -= 1;
+                  });
+                }
+              },
+              onStepContinue: (){
+                if(_index <= 0){
+                  if(_formDados.currentState!.validate()){
+                    setState(() {
+                      _index += 1;
+                    });
+                  }
+                }
+
+                if(_index >= 1){
+                  setState(() {
+                    _salvaProprietario(context);
+                  });
+                }
+              },
+              onStepTapped: (int index){
+                setState(() {
+                  _index = index;
+                });
+              },
+
+
+
+            ),
+          ),
+        )
+
+    );
+  }
+
+
+  void _salvaProprietario(BuildContext context){
+    final String nomeDoProprietario = _nomeProprietarioController.text;
+    final int? cpfCnpj = int.tryParse(UtilBrasilFields.removeCaracteres(_cpfController.text));
+    final int? codLograd =    int.tryParse(_codLogradController.text);
+    final String lograd = _logradController.text;
+    final int? numero = int.tryParse(_numeroController.text);
+    final int? aptoScv = int.tryParse(_aptoScvController.text);
+    final String bairro = _bairroController.text;
+    final String cidade = _cidadeController.text;
+    final String uf = _ufController.text;
+    final int? cep = int.tryParse(_cepController.text);
+    final PessoaFisica novoProprietario = PessoaFisica(
+        nomeDoProprietario,
+        cpfCnpj!,
+        codLograd!,
+        lograd,
+        numero!,
+        aptoScv!,
+        bairro,
+        cidade,
+        uf,
+        cep!);
+    Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((cpfCnpj) => Navigator.pop(context));
+  }
+}
+
+/*
+SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -173,56 +434,5 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
               ],
             ),
           ),
-        )
-
-    );
-  }
-  void _salvaProprietario(BuildContext context){
-    final String nomeDoProprietario = _nomeProprietarioController.text;
-    final int cpfCnpj = int.parse(_cpfCnpjController.text);
-    final int codLograd =    int.parse(_codLogradController.text);
-    final String lograd = _logradController.text;
-    final int numero = int.parse(_numeroController.text);
-    final int aptoScv = int.parse(_aptoScvController.text);
-    final String bairro = _bairroController.text;
-    final String cidade = _cidadeController.text;
-    final String uf = _ufController.text;
-    final int cep = int.parse(_cepController.text);
-    final PessoaFisica novoProprietario = PessoaFisica(
-        nomeDoProprietario,
-        cpfCnpj,
-        codLograd,
-        lograd,
-        numero,
-        aptoScv,
-        bairro,
-        cidade,
-        uf,
-        cep);
-    _dao.save(novoProprietario).then((cpfCnpj) => Navigator.pop(context));
-  }
-}
-
-/*
-class _campoItem extends StatelessWidget{
-
-
-  final String name;
-
-  _campoItem(TextEditingController compoControle, this.name  );
-
-  @override
-  Widget build(BuildContext context){
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Material(
-        child: TextField(
-          decoration: InputDecoration(
-
-            labelText: this.name,
-          ),
         ),
-      ),
-    );
-  }
-}*/
+*/

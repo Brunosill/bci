@@ -1,13 +1,21 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
+import 'package:bci/telas/from/pessoafisica_form.dart';
 import 'package:bci/telas/from/pessoajuridica_form.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ProprietarioList extends StatelessWidget {
-  ProprietarioList({Key? key}) : super(key: key);
+class PessoaFisicaList extends StatefulWidget {
+  PessoaFisicaList({Key? key}) : super(key: key);
 
+  @override
+  State<PessoaFisicaList> createState() => _PessoaFisicaListState();
+}
+
+class _PessoaFisicaListState extends State<PessoaFisicaList> {
   final PessoaFisicaDao _dao = PessoaFisicaDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +24,7 @@ class ProprietarioList extends StatelessWidget {
       ),
       body: FutureBuilder<List<PessoaFisica>>(
         initialData: const [],
-        future: _dao.findAll(),
+        future: Provider.of<PessoaFisicaDao>(context, listen: false).findAll(),
         builder: (context, snapshot) {
           switch(snapshot.connectionState){
 
@@ -61,9 +69,13 @@ class ProprietarioList extends StatelessWidget {
             Navigator.of(context)
                 .push(
               MaterialPageRoute(
-                builder: (context) => const PessoaJuridicaForm(),
+                builder: (context) => const PessoaFisicaForm(),
             ),
-            );
+            ).then((value){
+              setState(() {
+                widget.createState();
+              });
+            });
           },
           child: const Icon(Icons.add),
         ),
