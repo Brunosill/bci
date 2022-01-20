@@ -1,8 +1,23 @@
+import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/telas/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'database/dao/dao_base/pessoas/pessoajuridica_dao.dart';
 
 void main() {
-  runApp(const BCI());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => PessoaJuridicaDao(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PessoaFisicaDao(),
+        )
+      ],
+    child: BCI(),
+    )
+  );
 }
 
 class BCI extends StatelessWidget {

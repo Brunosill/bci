@@ -1,5 +1,5 @@
-class Proprietario {
-  final String nomeProprietario;
+class PessoaFisica {
+  final String nome;
   final int cpfCnpj;
   final int codLograd;
   final String lograd;
@@ -10,8 +10,8 @@ class Proprietario {
   final String uf;
   final int cep;
 
-  Proprietario(
-    this.nomeProprietario,
+  PessoaFisica(
+    this.nome,
     this.cpfCnpj,
     this.codLograd,
     this.lograd,
@@ -25,7 +25,7 @@ class Proprietario {
 
   @override
   String toString() {
-    return 'Proprietario{Nome do Proprietario:$nomeProprietario, cpf/cnpj: $cpfCnpj, cod.Lograd: $codLograd,'
+    return 'Pessoa Fisica{Nome:$nome, cpf/cnpj: $cpfCnpj, cod.Lograd: $codLograd,'
         'Logradradouro: $lograd, Número: $numero, apto.S.CV: $aptoScv, Bairro: $bairro, Cidade: $cidade, UF:$uf, cep: $cep}';
   }
 }
