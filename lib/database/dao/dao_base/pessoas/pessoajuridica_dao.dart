@@ -7,11 +7,12 @@ import '../../../dados/pessoa_database.dart';
 
 class PessoaJuridicaDao extends ChangeNotifier{
   static const String pessoaJuridica = "CREATE TABLE $_pessoaJuridica("
-      "$_cpfCnpj INTEGER PRIMERY KEY,"
+      //"$_id INTEGER PRIMERY KEY AUTOINCREMENT,"
+      "$_cpfCnpj TEXT PRIMERY KEY,"
       "$_razaoSocial TEXT,"
-      "$_inscriCnpj INTEGER,"
-      "$_inscriEstadual INTEGER,"
-      "$_inscriMunicipal INTEGER,"
+      "$_inscriCnpj TEXT,"
+      "$_inscriEstadual TEXT,"
+      "$_inscriMunicipal TEXT,"
       "$_cnae TEXT,"
       "$_nomeFantasia TEXT,"
       "$_regime TEXT,"
@@ -23,8 +24,9 @@ class PessoaJuridicaDao extends ChangeNotifier{
       "$_mEmpresa TEXT,"
       "$_emiteNFiscal TEXT)";
 
+  //static const String _id = 'id';
   static const String _cpfCnpj = 'cpf_cnpj';
-  static const String _pessoaJuridica = 'empresarial';
+  static const String _pessoaJuridica = 'pessoa_juridica';
   static const String _razaoSocial = 'razao_social';
   static const String _inscriCnpj = 'inscricao_cnpj';
   static const String _inscriEstadual = 'inscricao_estadual';
@@ -48,6 +50,7 @@ class PessoaJuridicaDao extends ChangeNotifier{
 
   Map<String, dynamic> _toMap(PessoaJuridica pessoaJuridica) {
     final Map<String, dynamic> pessoaJuridicaMap = {};
+    //pessoaJuridicaMap[_id] = pessoaJuridica.id;
     pessoaJuridicaMap[_razaoSocial] = pessoaJuridica.razaoSocial;
     pessoaJuridicaMap[_cpfCnpj] = pessoaJuridica.cpfCnpj;
     pessoaJuridicaMap[_inscriCnpj] = pessoaJuridica.inscriCnpj;
@@ -78,6 +81,7 @@ class PessoaJuridicaDao extends ChangeNotifier{
     final List<PessoaJuridica> pessasJuridicas = [];
     for (Map<String, dynamic> row in result) {
       final PessoaJuridica pessoaJuridica = PessoaJuridica(
+        //row[_id],
         row[_cpfCnpj],
         row[_razaoSocial],
         row[_inscriCnpj],

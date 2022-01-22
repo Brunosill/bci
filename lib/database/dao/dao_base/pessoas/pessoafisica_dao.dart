@@ -1,26 +1,29 @@
 
+
 import 'package:bci/database/dados/pessoa_database.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-class PessoaFisicaDao extends ChangeNotifier {
-  static const String pessoaFisica = 'CREATE TABLE $_pessoafisica('
-      '$_cpfcnpj INTEGER PRIMARY KEY, ' //usado com id
-      '$_nomeProprietario TEXT, '
-      '$_codLograd INTEGER,'
+class PessoaFisicaDao with ChangeNotifier{
+  static const String pessoaFisica = 'CREATE TABLE $_pessoaFisica('
+      //'$_id INTEGER PRIMARY KEY AUTOINCREMENT,'
+      '$_cpf TEXT PRIMARY KEY,' //usado com id
+      '$_nome TEXT, '
+      '$_codLograd TEXT,'
       '$_lograd TEXT,'
-      '$_numero INTEGER,'
-      '$_aptoScv INTEGER,'
+      '$_numero TEXT,'
+      '$_aptoScv TEXT,'
       '$_bairro TEXT,'
       '$_cidade TEXT,'
       '$_uf TEXT,'
-      '$_cep INTEGER )';
+      '$_cep TEXT)';
 
 
-  static const String _pessoafisica = 'nome';
-  static const String _cpfcnpj = 'cpf_cnpj'; //usado com id
-  static const String _nomeProprietario = 'nome_proprietario';
+  static const String _pessoaFisica = 'nome';
+  //static const String _id = 'id';
+  static const String _cpf = 'cpf'; //usado com id
+  static const String _nome = 'nome';
   static const String _codLograd = 'cod_lograd';
   static const String _lograd = 'lograd';
   static const String _numero = 'numero';
@@ -30,19 +33,16 @@ class PessoaFisicaDao extends ChangeNotifier {
   static const String _uf = 'uf';
   static const String _cep = 'cep';
 
-
-
-
   Future<int> save(PessoaFisica pessoaFisica) async{
     final Database db = await getDatabase();
     Map<String, dynamic> pessoaFisicaMap = _toMap(pessoaFisica);
-    return db.insert(_pessoafisica, pessoaFisicaMap);
-  }
+    return db.insert(_pessoaFisica, pessoaFisicaMap);
 
+  }
   Map<String, dynamic> _toMap(PessoaFisica pessoaFisica) {
     final Map<String, dynamic> pessoaFisicaMap = {};
-    pessoaFisicaMap[_cpfcnpj] = pessoaFisica.cpfCnpj;
-    pessoaFisicaMap[_nomeProprietario] = pessoaFisica.nome;
+    pessoaFisicaMap[_cpf] = pessoaFisica.cpfCnpj;
+    pessoaFisicaMap[_nome] = pessoaFisica.nome;
     pessoaFisicaMap[_codLograd] = pessoaFisica.codLograd;
     pessoaFisicaMap[_lograd] = pessoaFisica.lograd;
     pessoaFisicaMap[_numero] = pessoaFisica.numero;
@@ -56,17 +56,16 @@ class PessoaFisicaDao extends ChangeNotifier {
 
   Future<List<PessoaFisica>> findAll() async{
     final Database db = await getDatabase();
-    final List<Map<String, dynamic>> result = await db.query(_pessoafisica);
+    final List<Map<String, dynamic>> result = await db.query(_pessoaFisica);
     List<PessoaFisica> pessoasFisicas = _toList(result);
     return pessoasFisicas;
   }
-
   List<PessoaFisica> _toList(List<Map<String, dynamic>> result) {
     final List<PessoaFisica> pessoasFisicas = [];
     for (Map<String, dynamic> row in result){
-      final PessoaFisica pessoaFisica = PessoaFisica(
-        row[_nomeProprietario],
-        row[_cpfcnpj],
+      final PessoaFisica pessoafisica = PessoaFisica(
+        row[_nome],
+        row[_cpf],
         row[_codLograd],
         row[_lograd],
         row[_numero],
@@ -76,12 +75,13 @@ class PessoaFisicaDao extends ChangeNotifier {
         row[_uf],
         row[_cep],
       );
-      pessoasFisicas.add(pessoaFisica);
+      pessoasFisicas.add(pessoafisica);
     }
     return pessoasFisicas;
   }
 
+  PessoaFisicaDao(){
+    findAll();
+  }
+
 }
-
-
-

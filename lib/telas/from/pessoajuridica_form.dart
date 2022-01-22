@@ -1,8 +1,10 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
+import 'package:bci/database/dao/dao_base/pessoas/pessoajuridica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class PessoaJuridicaForm extends StatefulWidget {
   const PessoaJuridicaForm({Key? key}) : super(key: key);
@@ -192,17 +194,19 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
     );
   }
   void _salvaProprietario(BuildContext context){
+    //final id = int.tryParse(UtilBrasilFields.removeCaracteres(_cpfCnpjController.text));
     final String nomeDoProprietario = _nomeProprietarioController.text;
-    final int cpfCnpj = int.parse(UtilBrasilFields.removeCaracteres(_cpfCnpjController.text));
-    final int codLograd =    int.parse(_codLogradController.text);
+    final String cpfCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);
+    final String codLograd = _codLogradController.text;
     final String lograd = _logradController.text;
-    final int numero = int.parse(_numeroController.text);
-    final int aptoScv = int.parse(_aptoScvController.text);
+    final String numero = _numeroController.text;
+    final String aptoScv = _aptoScvController.text;
     final String bairro = _bairroController.text;
     final String cidade = _cidadeController.text;
     final String uf = _ufController.text;
-    final int cep = int.parse(UtilBrasilFields.removeCaracteres(_cepController.text));
+    final String cep = UtilBrasilFields.removeCaracteres(_cepController.text);
     final PessoaFisica novoProprietario = PessoaFisica(
+        //id!,
         nomeDoProprietario,
         cpfCnpj,
         codLograd,
@@ -213,6 +217,6 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
         cidade,
         uf,
         cep);
-    _dao.save(novoProprietario).then((cpfCnpj) => Navigator.pop(context));
+    Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((id) => Navigator.pop(context));
   }
 }

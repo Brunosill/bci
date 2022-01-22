@@ -1,16 +1,18 @@
 class PessoaFisica {
+  //final int id;
   final String nome;
-  final int cpfCnpj;
-  final int codLograd;
+  final String cpfCnpj;
+  final String codLograd;
   final String lograd;
-  final int numero;
-  final int aptoScv;
+  final String numero;
+  final String aptoScv;
   final String bairro;
   final String cidade;
   final String uf;
-  final int cep;
+  final String cep;
 
   PessoaFisica(
+    //this.id,
     this.nome,
     this.cpfCnpj,
     this.codLograd,
@@ -25,7 +27,7 @@ class PessoaFisica {
 
   @override
   String toString() {
-    return 'Pessoa Fisica{Nome:$nome, cpf/cnpj: $cpfCnpj, cod.Lograd: $codLograd,'
+    return 'Pessoa Fisica{ Nome:$nome, cpf/cnpj: $cpfCnpj, cod.Lograd: $codLograd,'
         'Logradradouro: $lograd, Número: $numero, apto.S.CV: $aptoScv, Bairro: $bairro, Cidade: $cidade, UF:$uf, cep: $cep}';
   }
 }

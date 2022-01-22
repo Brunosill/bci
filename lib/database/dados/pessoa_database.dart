@@ -12,6 +12,7 @@ Future<Database> getDatabase() async {
       db.execute(PessoaJuridicaDao.pessoaJuridica,);
       db.execute(PessoaFisicaDao.pessoaFisica,);
   }, version: 1,
+
   onDowngrade: onDatabaseDowngradeDelete,
   );
 }

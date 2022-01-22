@@ -1,10 +1,11 @@
 class PessoaJuridica {
+  //final int id;
   final String razaoSocial;
-  final int cpfCnpj;
-  final int inscriCnpj;
-  final int inscriEstadual;
-  final int inscriMunicipal;
-  final int cnae;
+  final String cpfCnpj;
+  final String inscriCnpj;
+  final String inscriEstadual;
+  final String inscriMunicipal;
+  final String cnae;
   final String nomeFantasia;
   final String regime; //pessoal fisica, pessoal juridica, sociedade civel
   final String atividade;
@@ -16,9 +17,10 @@ class PessoaJuridica {
   final bool emiteNFiscal;
 
   PessoaJuridica(
-      this.cpfCnpj,
+    //{this.id},
+    this.cpfCnpj,
     this.razaoSocial,
-      this.inscriCnpj,
+    this.inscriCnpj,
     this.inscriEstadual,
     this.inscriMunicipal,
     this.cnae,
@@ -34,6 +36,6 @@ class PessoaJuridica {
 
   @override
   String toString() {
-    return 'Pessoa Juridica{ cpf/cnpj: $cpfCnpj, Razão Social: $razaoSocial, Inscrição cnpj; $inscriCnpj, Inscrição Estadual: $inscriEstadual, Inscrição Municipal: $inscriMunicipal, CNAE: $cnae, Nome Fantasia: $nomeFantasia, Regime: $regime, Atividade: $atividade, icms: $icms, iss: $iss, VlgSanitaria: $vlgSanitaria, NEmpresa: $mEmpresa, EmiteNFiscal: $emiteNFiscal}';
+    return 'Pessoa Juridica{cpf/cnpj: $cpfCnpj, Razão Social: $razaoSocial, Inscrição cnpj; $inscriCnpj, Inscrição Estadual: $inscriEstadual, Inscrição Municipal: $inscriMunicipal, CNAE: $cnae, Nome Fantasia: $nomeFantasia, Regime: $regime, Atividade: $atividade, icms: $icms, iss: $iss, VlgSanitaria: $vlgSanitaria, NEmpresa: $mEmpresa, EmiteNFiscal: $emiteNFiscal}';
   }
 }
