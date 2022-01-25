@@ -9,12 +9,12 @@ class PessoaJuridica {
   final String nomeFantasia;
   final String regime; //pessoal fisica, pessoal juridica, sociedade civel
   final String atividade;
-  final bool alvara;
-  final bool icms;
-  final bool iss;
-  final bool vlgSanitaria;
-  final bool mEmpresa;
-  final bool emiteNFiscal;
+  final int alvara;
+  final int icms;
+  final int iss;
+  final int vlgSanitaria;
+  final int mEmpresa;
+  final int emiteNFiscal;
 
   PessoaJuridica(
     //{this.id},

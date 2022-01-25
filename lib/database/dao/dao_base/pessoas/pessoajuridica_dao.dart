@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../../dados/pessoa_database.dart';
 
 class PessoaJuridicaDao extends ChangeNotifier{
-  static const String pessoaJuridica = "CREATE TABLE $_pessoaJuridica("
+  static const String tablePJ = "CREATE TABLE $_tablePJ("
       //"$_id INTEGER PRIMERY KEY AUTOINCREMENT,"
       "$_cpfCnpj TEXT PRIMERY KEY,"
       "$_razaoSocial TEXT,"
@@ -17,16 +17,16 @@ class PessoaJuridicaDao extends ChangeNotifier{
       "$_nomeFantasia TEXT,"
       "$_regime TEXT,"
       "$_atividade TEXT,"
-      "$_alvara TEXT,"
-      "$_icms TEXT,"
-      "$_iss TEXT,"
-      "$_vlgSanitaria TEXT,"
-      "$_mEmpresa TEXT,"
-      "$_emiteNFiscal TEXT)";
+      "$_alvara INTEGER,"
+      "$_icms INTEGER,"
+      "$_iss INTEGER,"
+      "$_vlgSanitaria INTEGER,"
+      "$_mEmpresa INTEGER,"
+      "$_emiteNFiscal INTEGER)";
 
   //static const String _id = 'id';
   static const String _cpfCnpj = 'cpf_cnpj';
-  static const String _pessoaJuridica = 'pessoa_juridica';
+  static const String _tablePJ = 'pessoa_juridica';
   static const String _razaoSocial = 'razao_social';
   static const String _inscriCnpj = 'inscricao_cnpj';
   static const String _inscriEstadual = 'inscricao_estadual';
@@ -45,7 +45,7 @@ class PessoaJuridicaDao extends ChangeNotifier{
   Future<int> save(PessoaJuridica empresarial) async {
     final Database db = await getDatabase();
     Map<String, dynamic> empresarialMap = _toMap(empresarial);
-    return db.insert(_pessoaJuridica, empresarialMap);
+    return db.insert(_tablePJ, empresarialMap);
   }
 
   Map<String, dynamic> _toMap(PessoaJuridica pessoaJuridica) {
@@ -71,7 +71,7 @@ class PessoaJuridicaDao extends ChangeNotifier{
 
   Future<List<PessoaJuridica>> findAll() async{
     final Database db = await getDatabase();
-    final List<Map<String, dynamic>> result = await db.query(_pessoaJuridica);
+    final List<Map<String, dynamic>> result = await db.query(_tablePJ);
     List<PessoaJuridica> pessoasJuridicas = _toList(result);
     return pessoasJuridicas;
   }

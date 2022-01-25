@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 class PessoaFisicaDao with ChangeNotifier{
-  static const String pessoaFisica = 'CREATE TABLE $_pessoaFisica('
+  static const String tablePF = 'CREATE TABLE $_tablePF('
       //'$_id INTEGER PRIMARY KEY AUTOINCREMENT,'
       '$_cpf TEXT PRIMARY KEY,' //usado com id
       '$_nome TEXT, '
@@ -20,7 +20,7 @@ class PessoaFisicaDao with ChangeNotifier{
       '$_cep TEXT)';
 
 
-  static const String _pessoaFisica = 'nome';
+  static const String _tablePF = 'nome';
   //static const String _id = 'id';
   static const String _cpf = 'cpf'; //usado com id
   static const String _nome = 'nome';
@@ -36,7 +36,7 @@ class PessoaFisicaDao with ChangeNotifier{
   Future<int> save(PessoaFisica pessoaFisica) async{
     final Database db = await getDatabase();
     Map<String, dynamic> pessoaFisicaMap = _toMap(pessoaFisica);
-    return db.insert(_pessoaFisica, pessoaFisicaMap);
+    return db.insert(_tablePF, pessoaFisicaMap);
 
   }
   Map<String, dynamic> _toMap(PessoaFisica pessoaFisica) {
@@ -56,7 +56,7 @@ class PessoaFisicaDao with ChangeNotifier{
 
   Future<List<PessoaFisica>> findAll() async{
     final Database db = await getDatabase();
-    final List<Map<String, dynamic>> result = await db.query(_pessoaFisica);
+    final List<Map<String, dynamic>> result = await db.query(_tablePF);
     List<PessoaFisica> pessoasFisicas = _toList(result);
     return pessoasFisicas;
   }

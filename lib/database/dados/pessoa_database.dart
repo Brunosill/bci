@@ -7,11 +7,12 @@ import 'package:sqflite/sqflite.dart';
 
 Future<Database> getDatabase() async {
   final String path = join(await getDatabasesPath(), 'pessoas.db');
-  return openDatabase(path,
+  return openDatabase(
+    path,
     onCreate: (db, version){
-      db.execute(PessoaJuridicaDao.pessoaJuridica,);
-      db.execute(PessoaFisicaDao.pessoaFisica,);
-  }, version: 1,
+      db.execute(PessoaJuridicaDao.tablePJ,);
+      db.execute(PessoaFisicaDao.tablePF,);
+  }, version: 2,
 
   onDowngrade: onDatabaseDowngradeDelete,
   );
