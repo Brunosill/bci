@@ -6,6 +6,8 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'compomentelist/corpolistpf.dart';
+
 class PessoaFisicaList extends StatefulWidget {
   PessoaFisicaList({Key? key}) : super(key: key);
 
@@ -18,67 +20,28 @@ class _PessoaFisicaListState extends State<PessoaFisicaList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de Proprietários'),
-      ),
-      body: FutureBuilder<List<PessoaFisica>>(
-        initialData: const [],
-        future: Provider.of<PessoaFisicaDao>(context, listen: false).findAll(),
-        builder: (context, snapshot) {
-          switch(snapshot.connectionState){
-
-            case ConnectionState.none:
-              break;
-            case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const <Widget>[
-                    CircularProgressIndicator(),
-                    Text('Carregando')
-                  ],
-                ),
-              );
-
-
-            case ConnectionState.active:
-              break;
-            case ConnectionState.done:
-              if(snapshot.data != null){
-                final List<PessoaFisica>? proprietarios = snapshot.data;
-                return ListView.builder(
-                  itemBuilder: (context, index){
-                    final PessoaFisica proprietario = proprietarios![index];
-                    return _proprietarioItem(proprietario);
-                  },
-                  itemCount: proprietarios!.length,
-                );
-              }
-              break;
-          }
-
-          return const Text('Erro desconhecido');
-
-        },
-      ),
-
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            Navigator.of(context)
-                .push(
-              MaterialPageRoute(
-                builder: (context) => const PessoaFisicaForm(),
+    return DefaultTabController(
+        length: 2,
+        child:Scaffold(
+          appBar: AppBar(
+            title: Text('Listas'),
+            automaticallyImplyLeading: true,
+            bottom: TabBar(
+              indicatorColor: Colors.white,
+              tabs: [
+                Tab(text: 'Pessoa Fisica'),
+                Tab(text: 'Pessoa Juridica' )
+              ]
             ),
-            ).then((value){
-              setState(() {
-                widget.createState();
-              });
-            });
-          },
-          child: const Icon(Icons.add),
-        ),
+
+          ),
+          body: TabBarView(
+            children: <Widget>[
+              CorpoListPF(),
+              Center(child:Text('vai'))
+            ]
+          )
+        )
     );
   }
 }

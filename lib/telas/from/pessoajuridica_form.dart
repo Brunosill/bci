@@ -1,7 +1,6 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoajuridica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoajuridica.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +26,7 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
   final TextEditingController _nomeFantasiaController = TextEditingController();
 
   final _formFical = GlobalKey<FormState>();
-  late String _dropRegime = ' ';
+  late String _dropRegime = 'Pessoa Fisica';
   late bool _regimeState = false;
   late String _dropAtividade = 'Comércio';
   final TextEditingController _regimeController = TextEditingController();
@@ -38,7 +37,6 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
   late bool _vlgSanitaria = false;
   late bool _mEmpresaState = false;
   late bool _emiteNFiscalState = false;
-
 
 
   @override
@@ -55,7 +53,7 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                   title: const Text('Registro Empresa',
                       style: TextStyle(
                         fontSize: 20.0),),
-                  isActive: _index <= 0,
+                  isActive: _index >= 0,
                   content: Form(
                     key: _formDados,
                     child: Column(
@@ -92,76 +90,14 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                               FilteringTextInputFormatter.digitsOnly,
                               CpfOuCnpjFormatter(),
                             ],
-                            /*
                             validator: (value){
                               if(!CPFValidator.isValid(value)){
                                 return 'Digite Cpf ou Cnpj valido';
                               }
                               return null;
                             }
-                            */
                         ),
 
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: "Razão Socia"
-                          ),
-                          style: TextStyle(
-                            fontSize: 20.0
-                          ),
-                          controller: _razaoSocialController,
-                          textCapitalization: TextCapitalization.words,
-                        ), //nrazao social
-
-                        TextFormField(
-                          controller: _inscriEstadualController,
-                          decoration: const InputDecoration(
-                            labelText: 'Inscrição Estadual'
-                          ),
-                          style: const TextStyle(
-                            fontSize: 20.0
-                          ),
-                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
-                        ), //inscricao estadual
-
-                        TextFormField(
-                          controller: _inscriMunicialController,
-                          decoration: const InputDecoration(
-                            labelText: 'Inscrição Municipal',
-                          ),
-                          style: const TextStyle(
-                            fontSize: 20
-                          ),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ]
-                        ),
-
-                        TextFormField(
-                          controller: _ativiadeController,
-                          decoration: const InputDecoration(
-                            labelText: 'Atividade Econômica (CNAE)'
-                          ),
-                          style: const TextStyle(
-                            fontSize: 20
-                          ),
-                          keyboardType: TextInputType.number,
-                          inputFormatters:[
-                            FilteringTextInputFormatter.digitsOnly
-                          ]
-                        )
-                      ]
-                    )
-                  ),
-               ),
-                Step(
-                  title: const Text('Dados fiscais'),
-                  isActive: _index >= 1,
-                  content: Form(
-                    key: _formFical,
-                    child: Column(
-                      children:[
                         Row(
                           children: <Widget>[
                             const Text('Regime: ',
@@ -173,7 +109,7 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                               icon:  const Icon(Icons.arrow_downward),
                               elevation: 16,
                               //style: const TextStyle( fontSize: 20),
-                              items: <String>['Pessoa Fisica', 'Pessoa Jurídica', 'Sociedade Civil', ' ']
+                              items: <String>['Pessoa Fisica', 'Pessoa Jurídica', 'Sociedade Civil']
                                   .map<DropdownMenuItem<String>>((String value){
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -191,6 +127,7 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                             ),
                           ]
                         ),
+
                         Row(
                           children: <Widget>[
                             const Text('Atividade: ',
@@ -218,7 +155,7 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                             ),
                           ]
                         ),
-
+                        
                         Row(
                           children: <Widget>[
                             Flexible(
@@ -349,6 +286,78 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                             ),
                           ]
                         )
+                      
+
+                      ]
+                    )
+                  ),
+               ),
+                Step(
+                  title: const Text('Dados fiscais', style: TextStyle(
+                    fontSize: 20
+                      )),
+                  isActive: _index >= 1,
+                  content: Form(
+                    key: _formFical,
+                    child: Column(
+                      children:[
+
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Razão Socia"
+                          ),
+                          style: TextStyle(
+                            fontSize: 20.0
+                          ),
+                          controller: _razaoSocialController,
+                          textCapitalization: TextCapitalization.words,
+                          validator: (value){
+                            if(value!.length <= 3){
+                              return 'Digite Razão Social';
+                            }
+                            return null;
+                          }
+                        ), //nrazao social
+
+                        TextFormField(
+                          controller: _inscriEstadualController,
+                          decoration: const InputDecoration(
+                            labelText: 'Inscrição Estadual'
+                          ),
+                          style: const TextStyle(
+                            fontSize: 20.0
+                          ),
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+                        ), //inscricao estadual
+
+                        TextFormField(
+                          controller: _inscriMunicialController,
+                          decoration: const InputDecoration(
+                            labelText: 'Inscrição Municipal',
+                          ),
+                          style: const TextStyle(
+                            fontSize: 20
+                          ),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ]
+                        ),
+
+                        TextFormField(
+                          controller: _ativiadeController,
+                          decoration: const InputDecoration(
+                            labelText: 'Atividade Econômica (CNAE)'
+                          ),
+                          style: const TextStyle(
+                            fontSize: 20
+                          ),
+                          keyboardType: TextInputType.number,
+                          inputFormatters:[
+                            FilteringTextInputFormatter.digitsOnly
+                          ]
+                        )  //atividade economica
+
                       ]
                     ),
                   )
@@ -375,18 +384,18 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
     );
   }
 
+
+
   _contiuStep1(contex){
-    if(_formDados.currentState!.validate() && _index <= 0){
+    if(_formDados.currentState!.validate() && _index == 0){
       setState((){
         _index += 1;
       });
-      print('00001');
-      print(_regimeState);
-    }
+    } 
   }
+ 
   _contiuStep2(contex){
-    _regimeController.text.length >= 4 ? _regimeState = true : _regimeState = false;
-    if(_index >= 1 && ){
+    if(_formFical.currentState!.validate() && _index == 1){
       setState(() {
         _salvaProprietario(context);
       });
@@ -394,11 +403,10 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
   }
 
   void _salvaProprietario(BuildContext context){
-    //final id = int.tryParse(UtilBrasilFields.removeCaracteres(_cpfCnpjController.text));
     final String cpfCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);
     final String razaoSocial = _razaoSocialController.text;
     final String inscriEstadual = _inscriEstadualController.text;
-    final String inscriCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);
+    final String inscriCnpj = cpfCnpj;
     final String inscriMunicipal = _inscriEstadualController.text;
     final String cnae = _cnaeController.text;
     final String nomeFantasia = _nomeFantasiaController.text;
