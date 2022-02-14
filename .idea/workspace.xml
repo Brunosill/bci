@@ -9,24 +9,30 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9208dd2-9b4c-4fee-b3cf-6e248c571025" name="Default Changelist" comment="refatoração">
-      <change beforePath="$PROJECT_DIR$/lib/database/dados/pessoa_database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dados/pessoa_database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/database/dao/dao_base/pessoas/pessoafisica_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dao/dao_base/pessoas/pessoafisica_dao.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/database/dao/dao_base/pessoas/pessoajuridica_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dao/dao_base/pessoas/pessoajuridica_dao.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modelos/base_modelo/pessoas/pessoajuridica.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modelos/base_modelo/pessoas/pessoajuridica.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/from/pessoajuridica_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/from/pessoajuridica_form.dart" afterDir="false" />
+    <list default="true" id="f9208dd2-9b4c-4fee-b3cf-6e248c571025" name="Default Changelist" comment="nova tela">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_22_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_22__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_33_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_33__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bci.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/telas/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/telas/dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/guedes/.android/avd/100.avd]" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="principal" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,6 +60,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />

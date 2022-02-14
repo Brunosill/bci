@@ -15,7 +15,7 @@
     },
     {
       "name": "brasil_fields",
-      "rootUri": "file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/brasil_fields-1.3.0",
+      "rootUri": "file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/brasil_fields-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -206,7 +206,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-01-25T13:34:03.320281Z",
+  "generated": "2022-02-14T21:17:59.530253Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }
