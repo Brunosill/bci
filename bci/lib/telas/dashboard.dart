@@ -1,8 +1,6 @@
 import 'package:bci/telas/list/proprietario_list.dart';
 import 'package:flutter/material.dart';
 
-import 'list/proprietario_list.dart';
-
 class Dashboard extends StatelessWidget{
   const Dashboard({Key? key}) : super(key: key);
 
