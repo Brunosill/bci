@@ -1,0 +1,574 @@
+Index: lib/database/dados/pessoa_database.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// ignore_for_file: prefer_collection_literals, unused_local_variable\n\nimport 'package:bci/database/dao/dao_base/pessoas/pessoajuridica_dao.dart';\nimport 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';\nimport 'package:path/path.dart';\nimport 'package:sqflite/sqflite.dart';\n\nFuture<Database> getDatabase() async {\n  final String path = join(await getDatabasesPath(), 'pessoas.db');\n  return openDatabase(\n    path,\n    onCreate: (db, version){\n      db.execute(PessoaJuridicaDao.tablePJ,);\n      db.execute(PessoaFisicaDao.tablePF,);\n  }, version: 1,\n\n  onDowngrade: onDatabaseDowngradeDelete,\n  );\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/database/dados/pessoa_database.dart b/lib/database/dados/pessoa_database.dart
+--- a/lib/database/dados/pessoa_database.dart	(revision a57755147b2ea394ca1ba234b2f925d81664ed23)
++++ b/lib/database/dados/pessoa_database.dart	(date 1643073604899)
+@@ -12,7 +12,7 @@
+     onCreate: (db, version){
+       db.execute(PessoaJuridicaDao.tablePJ,);
+       db.execute(PessoaFisicaDao.tablePF,);
+-  }, version: 1,
++  }, version: 2,
+ 
+   onDowngrade: onDatabaseDowngradeDelete,
+   );
+Index: lib/telas/from/pessoajuridica_form.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import 'package:bci/database/dao/dao_base/pessoas/pessoajuridica_dao.dart';\nimport 'package:bci/modelos/base_modelo/pessoas/pessoajuridica.dart';\nimport 'package:brasil_fields/brasil_fields.dart';\nimport 'package:flutter/cupertino.dart';\nimport 'package:flutter/material.dart';\nimport 'package:flutter/services.dart';\nimport 'package:provider/provider.dart';\n\nclass PessoaJuridicaForm extends StatefulWidget {\n  const PessoaJuridicaForm({Key? key}) : super(key: key);\n\n  @override\n  State<PessoaJuridicaForm> createState() => _PessoaJuridicaFormState();\n}\n\nclass _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {\n\n  //controler\n  int _index =0;\n\n  final _formDados = GlobalKey<FormState>();\n  final TextEditingController _razaoSocialController = TextEditingController();\n  final TextEditingController _cpfCnpjController = TextEditingController();\n  final TextEditingController _inscriEstadualController = TextEditingController();\n  final TextEditingController _inscriMunicialController = TextEditingController();\n  final TextEditingController _cnaeController = TextEditingController();\n  final TextEditingController _nomeFantasiaController = TextEditingController();\n\n  final _formFical = GlobalKey<FormState>();\n  late String _dropRegime = ' ';\n  late bool _regimeState = false;\n  late String _dropAtividade = 'Comércio';\n  final TextEditingController _regimeController = TextEditingController();\n  final TextEditingController _ativiadeController = TextEditingController();\n  late bool _alvaraState = false;\n  late bool _icmsState = false;\n  late bool _issState = false;\n  late bool _vlgSanitaria = false;\n  late bool _mEmpresaState = false;\n  late bool _emiteNFiscalState = false;\n\n\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n        appBar: AppBar(title: const Text('Cadastro de Pessoa Juridica'),\n        ),\n        body: SingleChildScrollView(\n          child: Center(\n            child: Stepper(\n              currentStep: _index,\n              steps: <Step>[\n                Step(\n                  title: const Text('Registro Empresa',\n                      style: TextStyle(\n                        fontSize: 20.0),),\n                  isActive: _index <= 0,\n                  content: Form(\n                    key: _formDados,\n                    child: Column(\n                      children: <Widget>[\n\n                        TextFormField(\n                          controller: _nomeFantasiaController,\n                          decoration: const InputDecoration(\n                              labelText: 'Nome Fantasia'\n                          ),\n                          style: TextStyle(\n                            fontSize: 20,\n                          ),\n                          textCapitalization: TextCapitalization.words,\n                          validator: (value){\n                            if(value!.length <= 3){\n                              return 'Digite Nome Fantasia';\n                            }\n                            return null;\n                          }\n                        ), //nome fantasia\n\n                        TextFormField(\n                            decoration: const InputDecoration(\n                                labelText: 'CPF/CNPJ'\n                            ),\n                            maxLength: 18,\n                            style: const TextStyle(\n                                fontSize: 20\n                            ),\n                            controller: _cpfCnpjController,\n                            keyboardType: TextInputType.number,\n                            inputFormatters: [\n                              FilteringTextInputFormatter.digitsOnly,\n                              CpfOuCnpjFormatter(),\n                            ],\n                            /*\n                            validator: (value){\n                              if(!CPFValidator.isValid(value)){\n                                return 'Digite Cpf ou Cnpj valido';\n                              }\n                              return null;\n                            }\n                            */\n                        ),\n\n                        TextFormField(\n                          decoration: const InputDecoration(\n                            labelText: \"Razão Socia\"\n                          ),\n                          style: TextStyle(\n                            fontSize: 20.0\n                          ),\n                          controller: _razaoSocialController,\n                          textCapitalization: TextCapitalization.words,\n                        ), //nrazao social\n\n                        TextFormField(\n                          controller: _inscriEstadualController,\n                          decoration: const InputDecoration(\n                            labelText: 'Inscrição Estadual'\n                          ),\n                          style: const TextStyle(\n                            fontSize: 20.0\n                          ),\n                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),\n                        ), //inscricao estadual\n\n                        TextFormField(\n                          controller: _inscriMunicialController,\n                          decoration: const InputDecoration(\n                            labelText: 'Inscrição Municipal',\n                          ),\n                          style: const TextStyle(\n                            fontSize: 20\n                          ),\n                          keyboardType: TextInputType.number,\n                          inputFormatters: [\n                            FilteringTextInputFormatter.digitsOnly,\n                          ]\n                        ),\n\n                        TextFormField(\n                          controller: _ativiadeController,\n                          decoration: const InputDecoration(\n                            labelText: 'Atividade Econômica (CNAE)'\n                          ),\n                          style: const TextStyle(\n                            fontSize: 20\n                          ),\n                          keyboardType: TextInputType.number,\n                          inputFormatters:[\n                            FilteringTextInputFormatter.digitsOnly\n                          ]\n                        )\n                      ]\n                    )\n                  ),\n               ),\n                Step(\n                  title: const Text('Dados fiscais'),\n                  isActive: _index >= 1,\n                  content: Form(\n                    key: _formFical,\n                    child: Column(\n                      children:[\n                        Row(\n                          children: <Widget>[\n                            const Text('Regime: ',\n                            style: TextStyle(\n                              fontSize: 20.0\n                            )),\n                            DropdownButton(\n                              value: _dropRegime,\n                              icon:  const Icon(Icons.arrow_downward),\n                              elevation: 16,\n                              //style: const TextStyle( fontSize: 20),\n                              items: <String>['Pessoa Fisica', 'Pessoa Jurídica', 'Sociedade Civil', ' ']\n                                  .map<DropdownMenuItem<String>>((String value){\n                                return DropdownMenuItem<String>(\n                                  value: value,\n                                  child: Text(value,\n                                      style: const TextStyle(\n                                        fontSize: 20\n                                      )),\n                                );\n                              }).toList(),\n                              onChanged: (String? novovalue){\n                                setState((){\n                                  _dropRegime = novovalue!;\n                                });\n                              },\n                            ),\n                          ]\n                        ),\n                        Row(\n                          children: <Widget>[\n                            const Text('Atividade: ',\n                            style: TextStyle(\n                              fontSize: 20,\n                            )),\n                            DropdownButton(\n                              value: _dropAtividade,\n                              icon: const Icon(Icons.arrow_downward),\n                              elevation: 16,\n                              onChanged: (String? novoValue){\n                                setState((){\n                                  _dropAtividade = novoValue!;\n                                });\n                              },\n                              items: <String>['Comércio', 'Serviço', 'Autonomo']\n                                    .map<DropdownMenuItem<String>>((String value){\n                                     return DropdownMenuItem<String>(\n                                       value: value,\n                                       child: Text(value,\n                                         style: const TextStyle(fontSize: 20)\n                                       ),\n                                     );\n                              }).toList(),\n                            ),\n                          ]\n                        ),\n\n                        Row(\n                          children: <Widget>[\n                            Flexible(\n                              fit: FlexFit.loose,\n                              child: InputChip(\n                                avatar: const CircleAvatar(\n                                  backgroundColor: Colors.blueAccent,\n                                ),\n                                selectedColor: Colors.blueAccent,\n                                selected: _vlgSanitaria,\n                                label: const Text(\n                                  'Vig. Sanitária',\n                                  style: TextStyle(\n                                      fontSize: 18\n                                  ),\n                                ),\n                                onPressed: (){\n                                  setState((){\n                                    _vlgSanitaria = !_vlgSanitaria;\n                                  });\n                                })\n                            ),\n                            Flexible(\n                              fit: FlexFit.loose,\n                              child: InputChip(\n                                avatar: const CircleAvatar(\n                                  backgroundColor: Colors.blueAccent,\n                                ),\n                                selectedColor: Colors.blueAccent,\n                                selected: _alvaraState,\n                                label: const Text('Alvara',\n                                  style: TextStyle(\n                                      fontSize: 18\n                                    ),),\n                                onPressed: (){\n                                  setState((){\n                                    _alvaraState = !_alvaraState;\n                                  });\n                                }\n                              ),\n                            ),\n                            InputChip(\n                              avatar: const CircleAvatar(\n                                backgroundColor: Colors.blueAccent,\n                              ),\n                              selectedColor: Colors.blueAccent,\n                              selected: _icmsState,\n                              label: const Text(\n                                'ICMS',\n                                style: TextStyle(\n                                  fontSize: 18\n                                )\n                              ),\n                              onPressed: (){\n                                setState((){\n                                  _icmsState = !_icmsState;\n                                });\n                              }\n                            ),\n\n                          ],\n                        ),\n\n                        Row(\n                          children: <Widget>[\n                            Flexible(\n                              fit: FlexFit.loose,\n                              child: InputChip(\n                                avatar: const CircleAvatar(\n                                  backgroundColor: Colors.blueAccent\n                                ),\n                                selectedColor: Colors.blueAccent,\n                                selected: _issState,\n                                label: const Text(\n                                  'ISS',\n                                  style: TextStyle(\n                                    fontSize: 18\n                                  ),\n                                ),\n                                onPressed: (){\n                                  setState((){\n                                    _issState = !_issState;\n                                  });\n                                }\n                              ),\n                            ),\n                            Flexible(\n                              fit: FlexFit.loose,\n                              child: InputChip(\n                                avatar: const CircleAvatar(\n                                  backgroundColor: Colors.blueAccent,\n                                ),\n                                selectedColor: Colors.blueAccent,\n                                selected: _mEmpresaState,\n                                label: const Text(\n                                  'M. Empresa',\n                                  style: TextStyle(\n                                    fontSize: 18,\n                                  )\n                                ),\n                                onPressed: (){\n                                  setState((){\n                                    _mEmpresaState = !_mEmpresaState;\n                                  });\n                                }\n                              ),\n                            ),\n                            Flexible(\n                              fit: FlexFit.loose,\n                              child: InputChip(\n                                avatar: const CircleAvatar(\n                                  backgroundColor: Colors.blueAccent,\n                                ),\n                                selectedColor: Colors.blueAccent,\n                                selected: _emiteNFiscalState,\n                                label: const Text(\n                                  'Emite N. Fical',\n                                  style: TextStyle(\n                                    fontSize: 18,\n                                  )\n                                ),\n                                onPressed: (){\n                                  setState((){\n                                    _emiteNFiscalState = !_emiteNFiscalState;\n                                  });\n                                }\n                              ),\n                            ),\n                          ]\n                        )\n                      ]\n                    ),\n                  )\n                ),\n              ],\n              onStepCancel: (){\n                if (_index >= 0){\n                  setState(() {\n                    _index -= 1;\n                  });\n                }\n              },\n              onStepContinue: (){\n                final function = [\n                  _contiuStep1(context),\n                  _contiuStep2(context),\n                ];\n              },\n\n            )\n          )\n        )\n\n    );\n  }\n\n  _contiuStep1(contex){\n    if(_formDados.currentState!.validate() && _index <= 0){\n      setState((){\n        _index += 1;\n      });\n      print('00001');\n      print(_regimeState);\n    }\n  }\n  _contiuStep2(contex){\n    _regimeController.text.length >= 4 ? _regimeState = true : _regimeState = false;\n    if(_index >= 1 && _regimeState){\n      setState(() {\n        _salvaProprietario(context);\n      });\n    }\n  }\n\n  void _salvaProprietario(BuildContext context){\n    //final id = int.tryParse(UtilBrasilFields.removeCaracteres(_cpfCnpjController.text));\n    final String cpfCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);\n    final String razaoSocial = _razaoSocialController.text;\n    final String inscriEstadual = _inscriEstadualController.text;\n    final String inscriCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);\n    final String inscriMunicipal = _inscriEstadualController.text;\n    final String cnae = _cnaeController.text;\n    final String nomeFantasia = _nomeFantasiaController.text;\n    final String regime = _dropRegime;\n    final String atividade = _dropAtividade;\n    final int alvara  = _alvaraState ? 1 : 0;\n    final int icms  = _icmsState ? 1 : 0;\n    final int iss = _issState ? 1 : 0 ;\n    final int vlgSanitaria = _vlgSanitaria ? 1 : 0 ;\n    final int mEmpresa = _mEmpresaState ? 1 : 0;\n    final int emiteNFiscal = _emiteNFiscalState ? 1 : 0;\n    final PessoaJuridica novoProprietario = PessoaJuridica(\n        cpfCnpj,\n        razaoSocial,\n        inscriCnpj,\n        inscriEstadual,\n        inscriMunicipal,\n        cnae,\n        nomeFantasia,\n        regime,\n        atividade,\n        alvara,\n        icms,\n        iss,\n        vlgSanitaria,\n        mEmpresa,\n        emiteNFiscal);\n    Provider.of<PessoaJuridicaDao>(context, listen: false).save(novoProprietario).then((id) => Navigator.pop(context));\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lib/telas/from/pessoajuridica_form.dart b/lib/telas/from/pessoajuridica_form.dart
+--- a/lib/telas/from/pessoajuridica_form.dart	(revision a57755147b2ea394ca1ba234b2f925d81664ed23)
++++ b/lib/telas/from/pessoajuridica_form.dart	(date 1643059279704)
+@@ -26,8 +26,9 @@
+   final TextEditingController _cnaeController = TextEditingController();
+   final TextEditingController _nomeFantasiaController = TextEditingController();
+ 
+-  final _formFical = GlobalKey<FormState>();
+-  late String _dropRegime = ' ';
++  final _formFicais = GlobalKey<FormState>();
++
++  late String _dropRegime = 'Pessoa Fisica';
+   late bool _regimeState = false;
+   late String _dropAtividade = 'Comércio';
+   final TextEditingController _regimeController = TextEditingController();
+@@ -60,6 +61,35 @@
+                     key: _formDados,
+                     child: Column(
+                       children: <Widget>[
++                        Row(
++                              children: <Widget>[
++                                const Text('Regime: ',
++                                    style: TextStyle(
++                                        fontSize: 20.0
++                                    )),
++                                DropdownButton(
++                                  value: _dropRegime,
++                                  icon:  const Icon(Icons.arrow_downward),
++                                  elevation: 16,
++                                  //style: const TextStyle( fontSize: 20),
++                                  items: <String>['Pessoa Fisica', 'Pessoa Jurídica', 'Sociedade Civil']
++                                      .map<DropdownMenuItem<String>>((String value){
++                                    return DropdownMenuItem<String>(
++                                      value: value,
++                                      child: Text(value,
++                                          style: const TextStyle(
++                                              fontSize: 20
++                                          )),
++                                    );
++                                  }).toList(),
++                                  onChanged: (String? novovalue){
++                                    setState((){
++                                      _dropRegime = novovalue!;
++                                    });
++                                  },
++                                ),
++                              ]
++                          ),
+ 
+                         TextFormField(
+                           controller: _nomeFantasiaController,
+@@ -100,260 +130,243 @@
+                               return null;
+                             }
+                             */
+-                        ),
+-
+-                        TextFormField(
+-                          decoration: const InputDecoration(
+-                            labelText: "Razão Socia"
+-                          ),
+-                          style: TextStyle(
+-                            fontSize: 20.0
+-                          ),
+-                          controller: _razaoSocialController,
+-                          textCapitalization: TextCapitalization.words,
+-                        ), //nrazao social
++                        ), // cpfcnpj
+ 
+-                        TextFormField(
+-                          controller: _inscriEstadualController,
+-                          decoration: const InputDecoration(
+-                            labelText: 'Inscrição Estadual'
+-                          ),
+-                          style: const TextStyle(
+-                            fontSize: 20.0
+-                          ),
+-                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+-                        ), //inscricao estadual
+-
+-                        TextFormField(
+-                          controller: _inscriMunicialController,
+-                          decoration: const InputDecoration(
+-                            labelText: 'Inscrição Municipal',
+-                          ),
+-                          style: const TextStyle(
+-                            fontSize: 20
+-                          ),
+-                          keyboardType: TextInputType.number,
+-                          inputFormatters: [
+-                            FilteringTextInputFormatter.digitsOnly,
+-                          ]
+-                        ),
+-
+-                        TextFormField(
+-                          controller: _ativiadeController,
+-                          decoration: const InputDecoration(
+-                            labelText: 'Atividade Econômica (CNAE)'
+-                          ),
+-                          style: const TextStyle(
+-                            fontSize: 20
+-                          ),
+-                          keyboardType: TextInputType.number,
+-                          inputFormatters:[
+-                            FilteringTextInputFormatter.digitsOnly
+-                          ]
+-                        )
+-                      ]
+-                    )
+-                  ),
+-               ),
+-                Step(
+-                  title: const Text('Dados fiscais'),
+-                  isActive: _index >= 1,
+-                  content: Form(
+-                    key: _formFical,
+-                    child: Column(
+-                      children:[
+                         Row(
+-                          children: <Widget>[
+-                            const Text('Regime: ',
+-                            style: TextStyle(
+-                              fontSize: 20.0
+-                            )),
+-                            DropdownButton(
+-                              value: _dropRegime,
+-                              icon:  const Icon(Icons.arrow_downward),
+-                              elevation: 16,
+-                              //style: const TextStyle( fontSize: 20),
+-                              items: <String>['Pessoa Fisica', 'Pessoa Jurídica', 'Sociedade Civil', ' ']
+-                                  .map<DropdownMenuItem<String>>((String value){
+-                                return DropdownMenuItem<String>(
+-                                  value: value,
+-                                  child: Text(value,
+-                                      style: const TextStyle(
+-                                        fontSize: 20
+-                                      )),
+-                                );
+-                              }).toList(),
+-                              onChanged: (String? novovalue){
+-                                setState((){
+-                                  _dropRegime = novovalue!;
+-                                });
+-                              },
+-                            ),
+-                          ]
+-                        ),
+-                        Row(
+-                          children: <Widget>[
+-                            const Text('Atividade: ',
+-                            style: TextStyle(
+-                              fontSize: 20,
+-                            )),
+-                            DropdownButton(
+-                              value: _dropAtividade,
+-                              icon: const Icon(Icons.arrow_downward),
+-                              elevation: 16,
+-                              onChanged: (String? novoValue){
+-                                setState((){
+-                                  _dropAtividade = novoValue!;
+-                                });
+-                              },
+-                              items: <String>['Comércio', 'Serviço', 'Autonomo']
++                            children: <Widget>[
++                              const Text('Atividade: ',
++                                  style: TextStyle(
++                                    fontSize: 20,
++                                  )),
++                              DropdownButton(
++                                value: _dropAtividade,
++                                icon: const Icon(Icons.arrow_downward),
++                                elevation: 16,
++                                onChanged: (String? novoValue){
++                                  setState((){
++                                    _dropAtividade = novoValue!;
++                                  });
++                                },
++                                items: <String>['Comércio', 'Serviço', 'Autonomo']
+                                     .map<DropdownMenuItem<String>>((String value){
+-                                     return DropdownMenuItem<String>(
+-                                       value: value,
+-                                       child: Text(value,
+-                                         style: const TextStyle(fontSize: 20)
+-                                       ),
+-                                     );
+-                              }).toList(),
+-                            ),
+-                          ]
++                                  return DropdownMenuItem<String>(
++                                    value: value,
++                                    child: Text(value,
++                                        style: const TextStyle(fontSize: 20)
++                                    ),
++                                  );
++                                }).toList(),
++                              ),
++                            ]
+                         ),
+ 
+                         Row(
+                           children: <Widget>[
+                             Flexible(
+-                              fit: FlexFit.loose,
+-                              child: InputChip(
+-                                avatar: const CircleAvatar(
+-                                  backgroundColor: Colors.blueAccent,
+-                                ),
+-                                selectedColor: Colors.blueAccent,
+-                                selected: _vlgSanitaria,
+-                                label: const Text(
+-                                  'Vig. Sanitária',
+-                                  style: TextStyle(
+-                                      fontSize: 18
+-                                  ),
+-                                ),
+-                                onPressed: (){
+-                                  setState((){
+-                                    _vlgSanitaria = !_vlgSanitaria;
+-                                  });
+-                                })
++                                fit: FlexFit.loose,
++                                child: InputChip(
++                                    avatar: const CircleAvatar(
++                                      backgroundColor: Colors.blueAccent,
++                                    ),
++                                    selectedColor: Colors.blueAccent,
++                                    selected: _vlgSanitaria,
++                                    label: const Text(
++                                      'Vig. Sanitária',
++                                      style: TextStyle(
++                                          fontSize: 18
++                                      ),
++                                    ),
++                                    onPressed: (){
++                                      setState((){
++                                        _vlgSanitaria = !_vlgSanitaria;
++                                      });
++                                    })
+                             ),
+                             Flexible(
+                               fit: FlexFit.loose,
+                               child: InputChip(
+-                                avatar: const CircleAvatar(
+-                                  backgroundColor: Colors.blueAccent,
+-                                ),
+-                                selectedColor: Colors.blueAccent,
+-                                selected: _alvaraState,
+-                                label: const Text('Alvara',
+-                                  style: TextStyle(
+-                                      fontSize: 18
++                                  avatar: const CircleAvatar(
++                                    backgroundColor: Colors.blueAccent,
++                                  ),
++                                  selectedColor: Colors.blueAccent,
++                                  selected: _alvaraState,
++                                  label: const Text('Alvara',
++                                    style: TextStyle(
++                                        fontSize: 18
+                                     ),),
+-                                onPressed: (){
+-                                  setState((){
+-                                    _alvaraState = !_alvaraState;
+-                                  });
+-                                }
++                                  onPressed: (){
++                                    setState((){
++                                      _alvaraState = !_alvaraState;
++                                    });
++                                  }
+                               ),
+                             ),
+                             InputChip(
+-                              avatar: const CircleAvatar(
+-                                backgroundColor: Colors.blueAccent,
+-                              ),
+-                              selectedColor: Colors.blueAccent,
+-                              selected: _icmsState,
+-                              label: const Text(
+-                                'ICMS',
+-                                style: TextStyle(
+-                                  fontSize: 18
+-                                )
+-                              ),
+-                              onPressed: (){
+-                                setState((){
+-                                  _icmsState = !_icmsState;
+-                                });
+-                              }
++                                avatar: const CircleAvatar(
++                                  backgroundColor: Colors.blueAccent,
++                                ),
++                                selectedColor: Colors.blueAccent,
++                                selected: _icmsState,
++                                label: const Text(
++                                    'ICMS',
++                                    style: TextStyle(
++                                        fontSize: 18
++                                    )
++                                ),
++                                onPressed: (){
++                                  setState((){
++                                    _icmsState = !_icmsState;
++                                  });
++                                }
+                             ),
+ 
+                           ],
+                         ),
+ 
+                         Row(
+-                          children: <Widget>[
+-                            Flexible(
+-                              fit: FlexFit.loose,
+-                              child: InputChip(
+-                                avatar: const CircleAvatar(
+-                                  backgroundColor: Colors.blueAccent
+-                                ),
+-                                selectedColor: Colors.blueAccent,
+-                                selected: _issState,
+-                                label: const Text(
+-                                  'ISS',
+-                                  style: TextStyle(
+-                                    fontSize: 18
+-                                  ),
+-                                ),
+-                                onPressed: (){
+-                                  setState((){
+-                                    _issState = !_issState;
+-                                  });
+-                                }
+-                              ),
+-                            ),
+-                            Flexible(
+-                              fit: FlexFit.loose,
+-                              child: InputChip(
+-                                avatar: const CircleAvatar(
+-                                  backgroundColor: Colors.blueAccent,
+-                                ),
+-                                selectedColor: Colors.blueAccent,
+-                                selected: _mEmpresaState,
+-                                label: const Text(
+-                                  'M. Empresa',
+-                                  style: TextStyle(
+-                                    fontSize: 18,
+-                                  )
+-                                ),
+-                                onPressed: (){
+-                                  setState((){
+-                                    _mEmpresaState = !_mEmpresaState;
+-                                  });
+-                                }
+-                              ),
+-                            ),
+-                            Flexible(
+-                              fit: FlexFit.loose,
+-                              child: InputChip(
+-                                avatar: const CircleAvatar(
+-                                  backgroundColor: Colors.blueAccent,
+-                                ),
+-                                selectedColor: Colors.blueAccent,
+-                                selected: _emiteNFiscalState,
+-                                label: const Text(
+-                                  'Emite N. Fical',
+-                                  style: TextStyle(
+-                                    fontSize: 18,
+-                                  )
+-                                ),
+-                                onPressed: (){
+-                                  setState((){
+-                                    _emiteNFiscalState = !_emiteNFiscalState;
+-                                  });
+-                                }
+-                              ),
+-                            ),
+-                          ]
++                            children: <Widget>[
++                              Flexible(
++                                fit: FlexFit.loose,
++                                child: InputChip(
++                                    avatar: const CircleAvatar(
++                                        backgroundColor: Colors.blueAccent
++                                    ),
++                                    selectedColor: Colors.blueAccent,
++                                    selected: _issState,
++                                    label: const Text(
++                                      'ISS',
++                                      style: TextStyle(
++                                          fontSize: 18
++                                      ),
++                                    ),
++                                    onPressed: (){
++                                      setState((){
++                                        _issState = !_issState;
++                                      });
++                                    }
++                                ),
++                              ),
++                              Flexible(
++                                fit: FlexFit.loose,
++                                child: InputChip(
++                                    avatar: const CircleAvatar(
++                                      backgroundColor: Colors.blueAccent,
++                                    ),
++                                    selectedColor: Colors.blueAccent,
++                                    selected: _mEmpresaState,
++                                    label: const Text(
++                                        'M. Empresa',
++                                        style: TextStyle(
++                                          fontSize: 18,
++                                        )
++                                    ),
++                                    onPressed: (){
++                                      setState((){
++                                        _mEmpresaState = !_mEmpresaState;
++                                      });
++                                    }
++                                ),
++                              ),
++                              Flexible(
++                                fit: FlexFit.loose,
++                                child: InputChip(
++                                    avatar: const CircleAvatar(
++                                      backgroundColor: Colors.blueAccent,
++                                    ),
++                                    selectedColor: Colors.blueAccent,
++                                    selected: _emiteNFiscalState,
++                                    label: const Text(
++                                        'Emite N. Fical',
++                                        style: TextStyle(
++                                          fontSize: 18,
++                                        )
++                                    ),
++                                    onPressed: (){
++                                      setState((){
++                                        _emiteNFiscalState = !_emiteNFiscalState;
++                                      });
++                                    }
++                                ),
++                              ),
++                            ]
++                        ),
++
++                      ]
++                    )
++                  ),
++               ),
++                Step(
++                  title: const Text(
++                  'Dados Fiscais',
++                  style: TextStyle(
++                    fontSize: 20,
++                  )),
++                  isActive: false,
++                  content: Form(
++                    key: _formFicais,
++                    child: Column(
++                      children:[
++                        TextFormField(
++                          decoration: const InputDecoration(
++                              labelText: "Razão Socia"
++                          ),
++                          style: TextStyle(
++                              fontSize: 20.0
++                          ),
++                          controller: _razaoSocialController,
++                          textCapitalization: TextCapitalization.words,
++                          validator: (value){
++                            if(value!.length <= 3){
++                              return 'Infomer Razão Social';
++                            }
++                            return null;
++                          }
++                        ), //nrazao social
++
++                        TextFormField(
++                          controller: _inscriEstadualController,
++                          decoration: const InputDecoration(
++                              labelText: 'Inscrição Estadual'
++                          ),
++                          style: const TextStyle(
++                              fontSize: 20.0
++                          ),
++                          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
++                        ), //inscricao estadual
++
++                        TextFormField(
++                            controller: _inscriMunicialController,
++                            decoration: const InputDecoration(
++                              labelText: 'Inscrição Municipal',
++                            ),
++                            style: const TextStyle(
++                                fontSize: 20
++                            ),
++                            keyboardType: TextInputType.number,
++                            inputFormatters: [
++                              FilteringTextInputFormatter.digitsOnly,
++                            ]
++                        ),
++
++                        TextFormField(
++                          controller: _ativiadeController,
++                          decoration: const InputDecoration(
++                              labelText: 'Atividade Econômica (CNAE)'
++                          ),
++                          style: const TextStyle(
++                              fontSize: 20
++                          ),
++                          keyboardType: TextInputType.number,
++                          inputFormatters:[
++                            FilteringTextInputFormatter.digitsOnly
++                          ],
+                         )
+                       ]
+                     ),
+                   )
+                 ),
+               ],
++
+               onStepCancel: (){
+                 if (_index >= 0){
+                   setState(() {
+@@ -380,14 +393,12 @@
+       setState((){
+         _index += 1;
+       });
+-      print('00001');
+-      print(_regimeState);
+     }
++
+   }
+   _contiuStep2(contex){
+-    _regimeController.text.length >= 4 ? _regimeState = true : _regimeState = false;
+-    if(_index >= 1 && _regimeState){
+-      setState(() {
++    if(_formFicais.currentState!.validate() && _index <= 1){
++      setState((){
+         _salvaProprietario(context);
+       });
+     }
+@@ -398,7 +409,7 @@
+     final String cpfCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);
+     final String razaoSocial = _razaoSocialController.text;
+     final String inscriEstadual = _inscriEstadualController.text;
+-    final String inscriCnpj = UtilBrasilFields.removeCaracteres(_cpfCnpjController.text);
++    final String inscriCnpj = cpfCnpj ;
+     final String inscriMunicipal = _inscriEstadualController.text;
+     final String cnae = _cnaeController.text;
+     final String nomeFantasia = _nomeFantasiaController.text;

@@ -1,7 +1,6 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +19,7 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
   final TextEditingController _nomeProprietarioController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();
 
+  final _formEndereco = GlobalKey<FormState>();
   final TextEditingController _codLogradController = TextEditingController();
   final TextEditingController _logradController = TextEditingController();
   final TextEditingController _numeroController = TextEditingController();
@@ -43,6 +43,7 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
               steps: <Step>[
                 Step(
                     title: const Text('Dados do Pessoais'),
+                    isActive: _index >= 0,
                     content: Form(
                       key: _formDados,
                       child: Column(
@@ -94,8 +95,9 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                 ),
                 Step(
                     title: const Text('Endereço'),
-                    content: Container(
-                        alignment: Alignment.centerLeft,
+                    isActive: _index >= 1,
+                    content: Form(
+                      key: _formEndereco,
                         child: Column(
                             children: <Widget>[
                               TextFormField(
@@ -214,8 +216,15 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                                           ),
                                           keyboardType: TextInputType.number,
                                           inputFormatters: [
+                                            CepInputFormatter(),
                                             FilteringTextInputFormatter.digitsOnly,
                                           ],
+                                          validator: (value) {
+                                            if(value!.length <= 6){
+                                              return "Digite um Cep";
+                                            }
+                                            return null;
+                                          }
                                         )
                                     ),
                                   ]
@@ -227,32 +236,24 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
               ],
 
               onStepCancel: (){
-                if (_index > 0){
+                if (_index >= 0) {
                   setState((){
                     _index -= 1;
                   });
-                }
+                  }
               },
               onStepContinue: (){
-                if(_index <= 0){
-                  if(_formDados.currentState!.validate()){
-                    setState(() {
-                      _index += 1;
-                    });
-                  }
-                }
-
-                if(_index >= 1){
-                  setState(() {
-                    _salvaProprietario(context);
-                  });
-                }
+                final functions =[
+                  _contiuStep1(context),
+                  _contiuStep2(context),
+                ];
               },
-              onStepTapped: (int index){
+
+              /*onStepTapped: (int index){
                 setState(() {
                   _index = index;
                 });
-              },
+              },*/
 
 
 
@@ -263,176 +264,48 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
     );
   }
 
+  _contiuStep1(context){
+    if(_formDados.currentState!.validate() && _index <= 0){
+      setState((){
+        _index += 1;
+      });
+    }
+  }
+  _contiuStep2(context){
+    if(_formEndereco.currentState!.validate() && _index <= 1){
+      if(_index >= 1){
+        setState(() {
+          _salvaProprietario(context);
+        });
+      }
+    }
+  }
 
   void _salvaProprietario(BuildContext context){
+
+    //final id =  int.tryParse(UtilBrasilFields.removeCaracteres(_cpfController.text));
     final String nomeDoProprietario = _nomeProprietarioController.text;
-    final int? cpfCnpj = int.tryParse(UtilBrasilFields.removeCaracteres(_cpfController.text));
-    final int? codLograd =    int.tryParse(_codLogradController.text);
+    final String cpfCnpj = UtilBrasilFields.removeCaracteres(_cpfController.text);
+    final String codLograd = _codLogradController.text;
     final String lograd = _logradController.text;
-    final int? numero = int.tryParse(_numeroController.text);
-    final int? aptoScv = int.tryParse(_aptoScvController.text);
+    final String numero = _numeroController.text;
+    final String aptoScv = _aptoScvController.text;
     final String bairro = _bairroController.text;
     final String cidade = _cidadeController.text;
     final String uf = _ufController.text;
-    final int? cep = int.tryParse(_cepController.text);
+    final String cep = _cepController.text;
     final PessoaFisica novoProprietario = PessoaFisica(
+       // id!,
         nomeDoProprietario,
-        cpfCnpj!,
-        codLograd!,
+        cpfCnpj,
+        codLograd,
         lograd,
-        numero!,
-        aptoScv!,
+        numero,
+        aptoScv,
         bairro,
         cidade,
         uf,
-        cep!);
-    Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((cpfCnpj) => Navigator.pop(context));
+        cep);
+    Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((id) => Navigator.pop(context));
   }
 }
-
-/*
-SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                //cpf
-                TextField(
-                  controller: _cpfCnpjController,
-                  decoration: const InputDecoration(
-                    labelText: 'CPF/CNPJ',
-                  ),
-                  style: const TextStyle(
-                    fontSize: 24.0,
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _nomeProprietarioController,
-                    decoration: const InputDecoration(
-                      labelText: 'Nome completo',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _codLogradController,
-                    decoration: const InputDecoration(
-                      labelText: 'cod. Lograd',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _logradController,
-                    decoration: const InputDecoration(
-                      labelText: 'Logradouro',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _numeroController,
-                    decoration: const InputDecoration(
-                      labelText: 'Número',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _aptoScvController,
-                    decoration: const InputDecoration(
-                      labelText: 'Apto S.Cv',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _bairroController,
-                    decoration: const InputDecoration(
-                      labelText: 'Bairro',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _cidadeController,
-                    decoration: const InputDecoration(
-                      labelText: 'Cidade',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _ufController,
-                    decoration: const InputDecoration(
-                      labelText: 'Estado',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: TextField(
-                    controller: _cepController,
-                    decoration: const InputDecoration(
-                      labelText: 'CEP',
-                    ),
-                    style: const TextStyle(
-                      fontSize: 24.0,
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: SizedBox(
-                    width: double.maxFinite,
-                    child: ElevatedButton(
-                      child: const Text('Salvar'),
-                      onPressed: () {
-                        return _salvaProprietario(context);
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-*/

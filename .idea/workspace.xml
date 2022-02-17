@@ -9,20 +9,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9208dd2-9b4c-4fee-b3cf-6e248c571025" name="Default Changelist" comment="nova tela">
+    <list default="true" id="f9208dd2-9b4c-4fee-b3cf-6e248c571025" name="Default Changelist" comment="refatoração">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_22_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_22__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_33_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_01_2022_10_33__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bci.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bci.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bci/lib/telas/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/telas/dashboard.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/database/dados/app_database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/database/dados/app_database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/database/dao/empresarial_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/database/dao/empresarial_dao.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/database/dao/proprietario_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/database/dao/proprietario_dao.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/telas/from/empresarial_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/telas/from/empresarial_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/telas/from/proprietario_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/telas/from/proprietario_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bci/lib/telas/list/proprietario_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bci/lib/telas/list/proprietario_list.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
