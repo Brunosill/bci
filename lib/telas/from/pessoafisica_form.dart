@@ -34,7 +34,7 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //appBar: AppBar(title: const Text('Cadastro de Proprietario'),),
+       // appBar: AppBar(title: const Text('Cadastro de Proprietario'),),
         body: SingleChildScrollView(
           child: Center(
             child: Stepper(
@@ -82,9 +82,9 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                                   CpfOuCnpjFormatter(),
                                 ],
                                 validator: (value){
-                                  /*if(!CPFValidator.isValid(value)){
+                                  if(!CPFValidator.isValid(value)){
                                     return 'Digite Cpf valido';
-                                  }*/
+                                  }
                                   return null;
                                 }
                             )

@@ -1,10 +1,7 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
-import 'package:bci/telas/from/pessoafisica_form.dart';
-import 'package:bci/telas/from/pessoajuridica_form.dart';
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 import 'compomentelist/corpolistpf.dart';
 
