@@ -8,6 +8,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "backdrop",
+      "rootUri": "file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/backdrop-0.7.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0",
       "packageUri": "lib/",
@@ -206,7 +212,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-02-17T18:20:28.327897Z",
+  "generated": "2022-02-21T03:33:28.821175Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }

@@ -75,7 +75,6 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                             return null;
                           }
                         ), //nome fantasia
-
                         TextFormField(
                             decoration: const InputDecoration(
                                 labelText: 'CPF/CNPJ'
@@ -91,13 +90,12 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                               CpfOuCnpjFormatter(),
                             ],
                             validator: (value){
-                              if(!CPFValidator.isValid(value)){
+                              /*if(!CPFValidator.isValid(value)){
                                 return 'Digite Cpf ou Cnpj valido';
-                              }
+                              }*/
                               return null;
                             }
                         ),
-
                         Row(
                           children: <Widget>[
                             const Text('Regime: ',
@@ -127,7 +125,6 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                             ),
                           ]
                         ),
-
                         Row(
                           children: <Widget>[
                             const Text('Atividade: ',
@@ -155,7 +152,6 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
                             ),
                           ]
                         ),
-                        
                         Row(
                           children: <Widget>[
                             Flexible(
@@ -218,7 +214,6 @@ class _PessoaJuridicaFormState extends State<PessoaJuridicaForm> {
 
                           ],
                         ),
-
                         Row(
                           children: <Widget>[
                             Flexible(
