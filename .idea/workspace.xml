@@ -10,46 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9208dd2-9b4c-4fee-b3cf-6e248c571025" name="Default Changelist" comment="refatoração">
-      <change afterPath="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao/imovel_dao.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/modelos/imovel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/telas/incricao.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/telas/list/incricoes_list.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/telas/menu/menuinscricao.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/.filecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/app.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/kernel_snapshot.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/kernel_snapshot.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/349b7a2a647f5993de8e78583380035f/kernel_snapshot.stamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/database/dados/configuracao_database.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao/inscricao_dao.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/modelos/conficuracao/inscricao.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeNativeLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/debug-mergeNativeLibs/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/kotlin/compileDebugKotlin/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/database/dados/bases_database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dados/bases_database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/database/dao/dao_base/setor_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao/setor_dao.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/from/inscricaoform.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/from/inscricao_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/from/pessoafisica_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/from/pessoafisica_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/inscricao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/inscricao.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/list/proprietario_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/list/proprietario_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/database/dados/bases_database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dados/incricoes_database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao/imovel_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao/imovel_dao.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao/setor_dao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/database/dao/configuracao/setor_dao.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modelos/imovel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modelos/base_modelo/imovel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modelos/inscricao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modelos/base_modelo/inscricao.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/list/incricoes_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/list/incricoes_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/menu/menuinscricao.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/menu/menuinscricao.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,10 +75,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/modelos/base_modelo" />
+      <recent name="$PROJECT_DIR$/lib/database/dao/configuracao" />
       <recent name="$PROJECT_DIR$/lib/database/dao/dao_base/Inscricao" />
       <recent name="$PROJECT_DIR$/lib/telas" />
       <recent name="$PROJECT_DIR$/lib/database/dao/dao_base/pessoas" />
-      <recent name="$PROJECT_DIR$/lib/modelos/base_modelo/pessoas" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

@@ -7,7 +7,7 @@ class MenuInscricao extends StatefulWidget{
 
 class _MenuInscricaoState extends State<MenuInscricao> {
   late int _index = 0;
-  final List<Widget> _pages = []
+  final List<Widget> _pages = [];
   @override
   Widget build(BuildContext context){
     return Scaffold(

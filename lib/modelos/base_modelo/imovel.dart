@@ -18,7 +18,7 @@ class Imovel {
   final String servicosUrbanos;
   final double areaTerreno;
   final double profundidade;
-  final int nUnidade;
+  final int nUnidades;
   final int nFrentes;
   final double areaConstruida;
   final double testadaAreal;
@@ -47,7 +47,7 @@ class Imovel {
       this.servicosUrbanos,
       this.areaTerreno,
       this.profundidade,
-      this.nUnidade,
+      this.nUnidades,
       this.nFrentes,
       this.areaConstruida,
       this.testadaAreal,
@@ -62,7 +62,7 @@ class Imovel {
         'Coleta: $coleta, Inseção: $insecao, Uso do Solo: $usoSolo, Elevação: $elevacao, Coberta: $coberta,'
         'Piso: $piso, Estado de Converçao:$estadoConserv, Padrão: $padrao, Pedologia: $pedologia, Especie: $especie,'
         'Topografia: $topografia, Patrimonio Construção: $patrimonioConstrucao, Servicos Urbanos: $servicosUrbanos,'
-        'Area Terreno: $areaTerreno, Profundidade: $profundidade, N. Unidade: $nUnidade, N. Frentes: $nFrentes,'
+        'Area Terreno: $areaTerreno, Profundidade: $profundidade, N. Unidade: $nUnidades, N. Frentes: $nFrentes,'
         'Area Construida: $areaConstruida, Testa Areal: $testadaAreal, Testa Ficticia: $testadaFicticia,'
         'Lateral Esquerda: $lateralEsquerda, Lateral Direita: $lateralDireita, Fundos: $fundos';
   }
