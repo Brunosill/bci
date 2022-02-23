@@ -33,7 +33,7 @@ class InscricaoDao{
   }
   Map<String, dynamic> _toMap(Inscricao inscricao){
     final Map<String, dynamic> inscricaoMap = {};
-    inscricaoMap[_inscricao] = inscricao.inscricao;
+    inscricaoMap[_inscricao] = inscricao.nInscricao;
     inscricaoMap[_distrito] = inscricao.distrito;
     inscricaoMap[_setor] = inscricao.setor;
     inscricaoMap[_qualdra] = inscricao.qualdra;

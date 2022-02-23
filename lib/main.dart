@@ -1,9 +1,5 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
-import 'package:bci/telas/dashboard.dart';
-import 'package:bci/telas/from/inscricao_form.dart';
-import 'package:bci/telas/from/pessoajuridica_form.dart';
-import 'package:bci/telas/incricao.dart';
-import 'package:bci/telas/inscricao.dart';
+import 'package:bci/telas/dashdoard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +35,7 @@ class BCI extends StatelessWidget {
           buttonColor: Colors.greenAccent[700],
           textTheme: ButtonTextTheme.primary,
       )),
-      home: DashDrop(),
+      home: Dashboard(),
     );
   }
 }

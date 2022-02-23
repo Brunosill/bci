@@ -1,18 +1,17 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:bci/telas/from/inscricao_form.dart';
-import 'package:bci/telas/from/pessoafisica_form.dart';
-import 'package:bci/telas/menu/menuinscricao.dart';
+import 'package:bci/telas/menu/menu_inscricao.dart';
 import 'package:flutter/material.dart';
 
-class DashDrop extends StatefulWidget{
-  const DashDrop({Key? key}) : super(key: key);
+class Dashboard extends StatefulWidget{
+  const Dashboard({Key? key}) : super(key: key);
 
 
   @override
-  State<DashDrop> createState() => _DashDropState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _DashDropState extends State<DashDrop> {
+class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [MenuInscricao(),InscricaoForm()];
@@ -23,8 +22,8 @@ class _DashDropState extends State<DashDrop> {
       drawerEnableOpenDragGesture: true,
       appBar: BackdropAppBar(
         automaticallyImplyLeading: false,
-        title: Text('Inscrição'),
-        actions: <Widget>[
+        title: const Text('Inscrição'),
+        actions: const <Widget>[
           BackdropToggleButton(icon: AnimatedIcons.list_view,)
         ],
       ),
@@ -35,14 +34,14 @@ class _DashDropState extends State<DashDrop> {
       backLayer: BackdropNavigationBackLayer(
         items: [
           Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
-                  children: <Widget>[
+                  children: const <Widget>[
                     ListTile(title: Text('Inscrição', style: TextStyle(fontSize: 18, color: Colors.white)))
                   ]
               )
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16.0),
             child: ListTile(title: Text('Dados da Edificação', style: TextStyle(fontSize: 18, color: Colors.white))),
           )

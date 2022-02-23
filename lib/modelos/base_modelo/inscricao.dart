@@ -1,5 +1,5 @@
 class Inscricao{
-  final int inscricao;
+  final String nInscricao;
   final int distrito;
   final int setor;
   final int qualdra;
@@ -10,7 +10,7 @@ class Inscricao{
   final String proprietarioConstrucao;
 
   Inscricao(
-      this.inscricao,
+      this.nInscricao,
       this.distrito,
       this.setor,
       this.qualdra,
@@ -23,7 +23,7 @@ class Inscricao{
 
   @override
   String toString() {
-    return 'Inscrição{Inscrição: $inscricao, distrito: $distrito, setor: $setor, qualdra: $qualdra, lote: $lote, subLote: $subLote,'
+    return 'Inscrição{Inscrição: $nInscricao, distrito: $distrito, setor: $setor, qualdra: $qualdra, lote: $lote, subLote: $subLote,'
     'situação: $situacao, Proprietario Terreno: $proprietarioTerreno, Proprietario Construçao: $proprietarioConstrucao';
   }
 }
