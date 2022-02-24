@@ -1,4 +1,4 @@
-import 'package:bci/database/dao/configuracao/setor_dao.dart';
+import 'package:bci/database/dao/configuracao/config_Inscricao_dao.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -7,7 +7,8 @@ Future<Database> getDatabase() async{
   return openDatabase(
     path,
     onCreate: (db, version){
-      db.execute(SetorDao.setorSql);
+      db.execute(ConfigInscricaoDao.ConfigSql);
     }, version: 1,
+    onDowngrade: onDatabaseDowngradeDelete,
   );
 }

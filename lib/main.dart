@@ -3,17 +3,30 @@ import 'package:bci/telas/dashdoard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'database/dao/configuracao/config_Inscricao_dao.dart';
+import 'database/dao/dao_base/Inscricao/imovel_dao.dart';
+import 'database/dao/dao_base/Inscricao/inscricao_dao.dart';
 import 'database/dao/dao_base/pessoas/pessoajuridica_dao.dart';
 
 void main() {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (context) => ConfigInscricaoDao(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => InscricaoDao(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ImovelDao(),
+        ),
+        ChangeNotifierProvider(
           create: (context) => PessoaJuridicaDao(),
         ),
         ChangeNotifierProvider(
           create: (context) => PessoaFisicaDao(),
-        )
+        ),
+
       ],
     child: BCI(),
     )

@@ -8,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 class PessoaFisicaDao with ChangeNotifier{
   static const String tablePF = 'CREATE TABLE $_tablePF('
       //'$_id INTEGER PRIMARY KEY AUTOINCREMENT,'
-      '$_cpf TEXT PRIMARY KEY,' //usado com id
+      '$_cpf TEXT PRIMARY KEY,'
       '$_nome TEXT, '
       '$_codLograd TEXT,'
       '$_lograd TEXT,'

@@ -1,8 +1,9 @@
 import 'package:bci/database/dados/incricoes_database.dart';
 import 'package:bci/modelos/base_modelo/inscricao.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/material.dart';
 
-class InscricaoDao{
+class InscricaoDao with ChangeNotifier{
   static const String tableInscricao = 'CREATE TABLE $_tableInscricao('
       '$_inscricao TEXT PRIMARY KEY,'
       '$_distrito INTERGE,'
@@ -68,5 +69,9 @@ class InscricaoDao{
       inscricoes.add(inscricao);
     }
     return inscricoes;
+  }
+
+  InscricaoDao(){
+    findAll();
   }
 }

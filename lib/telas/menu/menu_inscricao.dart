@@ -1,3 +1,4 @@
+import 'package:bci/telas/list/incricoes_list.dart';
 import 'package:flutter/material.dart';
 
 class MenuInscricao extends StatefulWidget{
@@ -7,13 +8,10 @@ class MenuInscricao extends StatefulWidget{
 
 class _MenuInscricaoState extends State<MenuInscricao> {
   late int _index = 0;
-  final List<Widget> _pages = [];
+  final List<Widget> _pages = [InscricaoLista()];
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: Center(
-
-      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _index,
         onTap: (value){
@@ -23,11 +21,11 @@ class _MenuInscricaoState extends State<MenuInscricao> {
         },
         items: const [
           BottomNavigationBarItem(
-            title: Text('Inscrição'),
+            label: 'Inscrição',
             icon: Icon(Icons.home_work_outlined)
           ),
           BottomNavigationBarItem(
-            title: Text('Nova Inscrição'),
+            label: 'Nova Inscrição' ,
             icon: Icon(Icons.add_box_outlined)
           )
         ]

@@ -1,8 +1,9 @@
 import 'package:bci/database/dados/incricoes_database.dart';
 import 'package:bci/modelos/base_modelo/imovel.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/material.dart';
 
-class ImovelDao{
+class ImovelDao with ChangeNotifier{
   static const String tableImovel = 'CREATE TABLE $_tableImovel('
       '$_inscricao TEXT PRIMARY KEY,'
       '$_tipoImovel TEXT,'
@@ -140,5 +141,9 @@ class ImovelDao{
       imoveis.add(imovel);
     }
     return imoveis;
+  }
+
+  ImovelDao(){
+    findAll();
   }
 }

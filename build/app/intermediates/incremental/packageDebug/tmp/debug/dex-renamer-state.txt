@@ -1,4 +1,4 @@
-#Wed Feb 23 09:42:29 BRT 2022
+#Thu Feb 24 01:12:12 BRT 2022
 base.0=/home/guedes/Projetos/flutter/bci/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

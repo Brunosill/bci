@@ -1,54 +1,57 @@
 import 'package:bci/database/dao/dao_base/Inscricao/inscricao_dao.dart';
 import 'package:bci/modelos/base_modelo/inscricao.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 
-class _ListDeInscricao extends StatelessWidget{
-  var _dao = InscricaoDao();
+class InscricaoLista extends StatelessWidget{
+  final InscricaoDao _dao = InscricaoDao();
 
   @override
   Widget build(BuildContext context){
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          FutureBuilder<List<Inscricao>>(
-            initialData: [],
-            future: _dao.findAll(),
-            builder: (context, snapshot){
-              switch(snapshot.connectionState){
-                case ConnectionState.none:
-                  break;
-                case ConnectionState.waiting:
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const <Widget>[
-                        CircularProgressIndicator(),
-                        Text('Carregando'),
-                      ]
-                    )
-                  );
-                case ConnectionState.active:
-                  break;
-                case ConnectionState.done:
-                  if(snapshot.data != null){
-                    final List<Inscricao>? inscricoes = snapshot.data;
-                    return ListView.builder(
-                      itemBuilder: (context, index){
-                        final Inscricao inscricao =  inscricoes![index];
-                        return _inscricaoItem(inscricao);
-                      }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("oe?")
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            FutureBuilder<List<Inscricao>>(
+              initialData: [],
+              future: _dao.findAll(),
+              builder: (context, snapshot){
+                switch(snapshot.connectionState){
+                  case ConnectionState.none:
+                    break;
+                  case ConnectionState.waiting:
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const <Widget>[
+                          CircularProgressIndicator(),
+                          Text('Carregando'),
+                        ]
+                      )
                     );
-                  }
+                  case ConnectionState.active:
+                    break;
+                  case ConnectionState.done:
+                    if(snapshot.data != null){
+                      final List<Inscricao>? inscricoes = snapshot.data;
+                      return ListView.builder(
+                        itemBuilder: (context, index){
+                          final Inscricao inscricao =  inscricoes![index];
+                          return _inscricaoItem(inscricao);
+                        }
+                      );
+                    }
+                }
+              return const Text('Erro Desconhecido');
               }
-            return const Text('Erro Desconhecido');
-            }
-          )
-        ]
+            )
+          ]
+        ),
       )
     );
   }
