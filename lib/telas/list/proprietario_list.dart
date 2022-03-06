@@ -1,6 +1,7 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 import 'compomentelist/corpolistpf.dart';
@@ -17,28 +18,35 @@ class _PessoaFisicaListState extends State<PessoaFisicaList> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child:Scaffold(
-          appBar: AppBar(
-            title: Text('Listas'),
-            automaticallyImplyLeading: true,
-            bottom: TabBar(
-              indicatorColor: Colors.white,
-              tabs: [
-                Tab(text: 'Pessoa Fisica'),
-                Tab(text: 'Pessoa Juridica' )
-              ]
-            ),
-
-          ),
-          body: TabBarView(
-            children: <Widget>[
-              CorpoListPF(),
-              Center(child:Text('vai'))
-            ]
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          FutureBuilder<List<PessoaFisica>>(
+            initialData: [],
+            future: Provider.of<PessoaFisicaDao>(context).findAll(),
+            builder: (context, snapshot){
+              switch(snapshot.connectionState){
+                case ConnectionState.waiting:
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const <Widget>[
+                        CircularProgressIndicator(),
+                        Text('Carregando'),
+                      ]
+                    )
+                  );
+                case ConnectionState.done:
+                  if(snapshot.data != null){
+                    final List<PessoaFisica>? pessoasFisicas = snapshot.data;
+                    return
+                  }
+              }
+            }
           )
-        )
+        ]
+      )
     );
   }
 }

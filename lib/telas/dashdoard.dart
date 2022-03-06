@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:bci/telas/from/inscricao_form.dart';
 import 'package:bci/telas/list/config_inscricao_list.dart';
 import 'package:bci/telas/menu/menu_inscricao.dart';
+import 'package:bci/telas/menu/menu_pessoas.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget{
@@ -15,7 +16,7 @@ class Dashboard extends StatefulWidget{
 class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [ConfigInscricaoList(),MenuInscricao(),InscricaoForm()];
+  final List<Widget> _pages = [MenuPessoas(),MenuInscricao(),InscricaoForm()];
 
   @override
   Widget build(BuildContext context){
@@ -33,22 +34,19 @@ class _DashboardState extends State<Dashboard> {
       frontLayer: _pages[_currentIndex],
       backLayerBackgroundColor: Colors.blue,
       backLayer: BackdropNavigationBackLayer(
-        items: [
+        items: const <Widget>[
           Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                  children: const <Widget>[
-                    ListTile(title: Text('Configuração', style: TextStyle(fontSize: 18, color: Colors.white)))
-                  ]
-              )
+            padding: EdgeInsets.all(10.0),
+            child: ListTile(title: Text('CPF/CNPJ', style:TextStyle(fontSize: 18, color:Colors.white)))
           ),
-          const Padding(
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ListTile(title: Text('Inscrição', style: TextStyle(fontSize: 18, color:Colors.white))),
+          ),
+          Padding(
             padding: EdgeInsets.all(16.0),
             child: ListTile(title: Text('Dados da Edificação', style: TextStyle(fontSize: 18, color: Colors.white))),
           ),
-          const ListTile(
-            title: Text("Inscrições")
-          )
         ],
         onTap: (int position) => {setState(() => _currentIndex = position)},
       ),
