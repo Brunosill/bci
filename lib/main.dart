@@ -1,5 +1,7 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/telas/dashdoard.dart';
+import 'package:bci/telas/list/pessoa_fisica_list.dart';
+import 'package:bci/telas/menu/menu_pessoas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

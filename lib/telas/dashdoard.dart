@@ -36,15 +36,15 @@ class _DashboardState extends State<Dashboard> {
       backLayer: BackdropNavigationBackLayer(
         items: const <Widget>[
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(7.0),
             child: ListTile(title: Text('CPF/CNPJ', style:TextStyle(fontSize: 18, color:Colors.white)))
           ),
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(7.0),
             child: ListTile(title: Text('Inscrição', style: TextStyle(fontSize: 18, color:Colors.white))),
           ),
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(7.0),
             child: ListTile(title: Text('Dados da Edificação', style: TextStyle(fontSize: 18, color: Colors.white))),
           ),
         ],
