@@ -1,5 +1,6 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/telas/dashdoard.dart';
+import 'package:bci/telas/from/incricao/inscricao_from.dart';
 import 'package:bci/telas/list/pessoa_fisica_list.dart';
 import 'package:bci/telas/menu/menu_pessoas.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class BCI extends StatelessWidget {
           buttonColor: Colors.greenAccent[700],
           textTheme: ButtonTextTheme.primary,
       )),
-      home: Dashboard(),
+      home: InscricaoForm(),
     );
   }
 }

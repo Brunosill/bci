@@ -1,5 +1,5 @@
 import 'package:backdrop/backdrop.dart';
-import 'package:bci/telas/from/inscricao_form.dart';
+import 'package:bci/telas/from/incricao/imovel_form.dart';
 import 'package:bci/telas/list/config_inscricao_list.dart';
 import 'package:bci/telas/menu/menu_inscricao.dart';
 import 'package:bci/telas/menu/menu_pessoas.dart';
@@ -16,7 +16,7 @@ class Dashboard extends StatefulWidget{
 class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [MenuPessoas(),MenuInscricao(),InscricaoForm()];
+  final List<Widget> _pages = [MenuPessoas(),MenuInscricao(),ImovelForm()];
 
   @override
   Widget build(BuildContext context){
