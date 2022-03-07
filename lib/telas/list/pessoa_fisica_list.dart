@@ -3,7 +3,7 @@ import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../from/pessoafisica_form.dart';
+import '../from/pessoa_fisica_form.dart';
 
 class PessoaFisicaList extends StatefulWidget {
   PessoaFisicaList({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class _PessoaFisicaListState extends State<PessoaFisicaList> {
                             itemCount: pessoasFisicas!.length,
                           );
                       }
-                      return const Text('Erro Desconvhecido');
+                      return const Text('Erro Desconhecido');
                     }
                 ),
               ),
@@ -81,7 +81,7 @@ class _PessoaFisicaListState extends State<PessoaFisicaList> {
         onPressed: (){
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => PessoaFisicaForm())).then((value) => setState((){}));
         },
-        child: Icon(Icons.add_outlined)
+        child: const Icon(Icons.add_outlined),
       ),
     );
 

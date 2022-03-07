@@ -1,5 +1,5 @@
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
-import 'package:bci/telas/from/pessoajuridica_form.dart';
+import 'package:bci/telas/from/pessoa_juridica_form.dart';
 import 'package:bci/telas/list/pessoa_fisica_list.dart';
 import 'package:bci/telas/list/pessoa_juridica_list.dart';
 import 'package:flutter/cupertino.dart';

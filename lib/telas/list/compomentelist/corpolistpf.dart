@@ -1,6 +1,6 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/modelos/base_modelo/pessoas/pessoafisica.dart';
-import 'package:bci/telas/from/pessoafisica_form.dart';
+import 'package:bci/telas/from/pessoa_fisica_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

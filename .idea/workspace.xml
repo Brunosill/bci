@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9208dd2-9b4c-4fee-b3cf-6e248c571025" name="Default Changelist" comment="refatoração">
-      <change afterPath="$PROJECT_DIR$/lib/telas/list/pessoa_fisica_list.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
@@ -28,10 +27,11 @@
       <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/dashdoard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/dashdoard.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/list/proprietario_list.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/telas/list/teste.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/list/pessoa_juridica_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/from/pessoafisica_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/from/pessoa_fisica_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/from/pessoajuridica_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/from/pessoa_juridica_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/list/compomentelist/corpolistpf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/list/compomentelist/corpolistpf.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/list/pessoa_fisica_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/list/pessoa_fisica_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/telas/list/pessoa_juridica_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/list/pessoa_juridica_list.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/telas/menu/menu_pessoas.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/telas/menu/menu_pessoas.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
