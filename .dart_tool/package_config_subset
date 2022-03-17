@@ -50,6 +50,10 @@ http
 2.14
 file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/
 file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib/
+http_interceptor
+2.12
+file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_interceptor-1.0.2/
+file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_interceptor-1.0.2/lib/
 http_parser
 2.12
 file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/

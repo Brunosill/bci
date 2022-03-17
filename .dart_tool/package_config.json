@@ -86,6 +86,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "http_interceptor",
+      "rootUri": "file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_interceptor-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http_parser",
       "rootUri": "file:///home/guedes/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
       "packageUri": "lib/",
@@ -218,7 +224,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-03-04T14:49:39.621675Z",
+  "generated": "2022-03-17T10:51:55.432026Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

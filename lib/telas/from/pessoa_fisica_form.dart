@@ -305,6 +305,6 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
         cidade,
         uf,
         cep);
-    Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((id) => Navigator.pop(context));
+    Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((cpfCnpj) => Navigator.pop(context));
   }
 }
