@@ -98,10 +98,15 @@ class _Item extends StatefulWidget{
 }
 
 class _ItemState extends State<_Item> {
+
+  final PessoaFisicaDao _dao = PessoaFisicaDao();
   @override
   Widget build(BuildContext context){
     return Card(
       child: ListTile(
+        onLongPress: (){
+         _dao.delete(widget.pessoaFisica.cpfCnpj);
+        },
         title: Text(widget.pessoaFisica.nome, style: const TextStyle(fontSize: 24.0,),),
         subtitle: Text(widget.pessoaFisica.cpfCnpj, style: const TextStyle(fontSize: 16.0,),),
       ),

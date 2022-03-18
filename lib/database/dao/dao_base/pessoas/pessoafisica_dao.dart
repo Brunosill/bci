@@ -80,6 +80,11 @@ class PessoaFisicaDao with ChangeNotifier{
     return pessoasFisicas;
   }
 
+  Future<int> delete(String cpf) async{
+    final Database db = await getDatabase();
+    return db.delete(_tablePF,  where: '$_cpf = ? ', whereArgs: [cpf]);
+  }
+
   PessoaFisicaDao(){
     findAll();
   }

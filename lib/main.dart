@@ -1,8 +1,9 @@
 import 'package:bci/database/dao/dao_base/pessoas/pessoafisica_dao.dart';
 import 'package:bci/telas/dashdoard.dart';
 import 'package:bci/telas/from/incricao/inscricao_from.dart';
-import 'package:bci/telas/list/pessoa_fisica_list.dart';
-import 'package:bci/telas/menu/menu_pessoas.dart';
+import 'package:bci/web/teste_cep.dart';
+import 'package:bci/web/webapi/cep_api.dart';
+import 'package:bci/web/webapi/cep_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,8 @@ import 'database/dao/dao_base/Inscricao/inscricao_dao.dart';
 import 'database/dao/dao_base/pessoas/pessoajuridica_dao.dart';
 
 void main() {
-  runApp(MultiProvider(
+  runApp(
+      MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) => ConfigInscricaoDao(),
@@ -30,8 +32,8 @@ void main() {
           create: (context) => PessoaFisicaDao(),
         ),
 
-      ],
-    child: BCI(),
+      ], child: BCI(),
+    
     )
   );
 }
@@ -51,7 +53,7 @@ class BCI extends StatelessWidget {
           buttonColor: Colors.greenAccent[700],
           textTheme: ButtonTextTheme.primary,
       )),
-      home: InscricaoForm(),
+      home: Dashboard(),
     );
   }
 }

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../modelos/cep_web.dart';
+import '../../web/webapi/cep_api.dart';
+
 class PessoaFisicaForm extends StatefulWidget {
   const PessoaFisicaForm({Key? key}) : super(key: key);
 
@@ -15,19 +18,21 @@ class PessoaFisicaForm extends StatefulWidget {
 class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
   int _index = 0;
 
+  final CepApi _cepApi = CepApi();
+
   final _formDados = GlobalKey<FormState>();
   final TextEditingController _nomeProprietarioController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();
 
   final _formEndereco = GlobalKey<FormState>();
   final TextEditingController _codLogradController = TextEditingController();
-  final TextEditingController _logradController = TextEditingController();
-  final TextEditingController _numeroController = TextEditingController();
-  final TextEditingController _aptoScvController = TextEditingController();
-  final TextEditingController _bairroController = TextEditingController();
-  final TextEditingController _cidadeController = TextEditingController();
-  final TextEditingController _ufController = TextEditingController();
-  final TextEditingController _cepController = TextEditingController();
+  late TextEditingController _logradController = TextEditingController();
+  late TextEditingController _numeroController = TextEditingController();
+  late TextEditingController _aptoScvController = TextEditingController();
+  late TextEditingController _bairroController = TextEditingController();
+  late TextEditingController _cidadeController = TextEditingController();
+  late TextEditingController _ufController = TextEditingController();
+  late TextEditingController _cepController = TextEditingController();
 
   final PessoaFisicaDao _dao = PessoaFisicaDao();
 
@@ -82,9 +87,11 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                                   CpfOuCnpjFormatter(),
                                 ],
                                 validator: (value){
-                                  if(!CPFValidator.isValid(value)){
+                                  /*if(!CPFValidator.isValid(value)){
                                     return 'Digite Cpf valido';
                                   }
+
+                                   */
                                   return null;
                                 }
                             )
@@ -99,6 +106,39 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                       key: _formEndereco,
                         child: Column(
                             children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                      flex: 2,
+                                      child: TextFormField(
+                                          controller: _cepController,
+                                          decoration: const InputDecoration(
+                                              labelText: "CEP"
+                                          ),
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            CepInputFormatter(),
+                                            FilteringTextInputFormatter.digitsOnly,
+                                          ],
+                                          validator: (value) {
+                                            if(value!.length <= 6){
+                                              return "Digite um Cep";
+                                            }
+                                            return null;
+                                          }
+                                      )
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.search_outlined),
+                                    onPressed: () {
+                                      _buscaCep(context);
+                                    },
+                                  )
+                                ]
+                              ),
                               TextFormField(
                                 controller: _logradController,
                                 decoration: const InputDecoration(
@@ -176,7 +216,7 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                                   ]
                               ),
 
-                              TextFormField(
+                              TextField(
                                   controller: _cidadeController,
                                   decoration: const InputDecoration(
                                     labelText: 'Cidade',
@@ -202,29 +242,6 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
                                     ),
                                     const SizedBox(
                                       width: 10,
-                                    ),
-                                    Expanded(
-                                        flex: 2,
-                                        child: TextFormField(
-                                          controller: _cepController,
-                                          decoration: const InputDecoration(
-                                              labelText: "CEP"
-                                          ),
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            CepInputFormatter(),
-                                            FilteringTextInputFormatter.digitsOnly,
-                                          ],
-                                          validator: (value) {
-                                            if(value!.length <= 6){
-                                              return "Digite um Cep";
-                                            }
-                                            return null;
-                                          }
-                                        )
                                     ),
                                   ]
                               ),
@@ -306,5 +323,24 @@ class _PessoaFisicaFormState extends State<PessoaFisicaForm> {
         uf,
         cep);
     Provider.of<PessoaFisicaDao>(context, listen: false).save(novoProprietario).then((cpfCnpj) => Navigator.pop(context));
+  }
+
+  void _buscaCep(BuildContext context){
+    FutureBuilder<CepWeb>(
+      //initialData: [],
+      future: _cepApi.findAll(_cepController.text),
+      builder:(context, snapshot) {
+        switch(snapshot.connectionState){
+          case ConnectionState.done:
+            final CepWeb? cepWeb = snapshot.data;
+            _cidadeController = TextEditingController(text: cepWeb?.localidade.toString());
+            _bairroController = TextEditingController(text: cepWeb?.bairro.toString());
+            _ufController = TextEditingController(text: cepWeb?.uf.toString());
+            print(cepWeb);
+
+        }
+        return Text('erro');
+      },
+    );
   }
 }
